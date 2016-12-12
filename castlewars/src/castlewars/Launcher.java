@@ -1,6 +1,6 @@
 package castlewars;
 
-import castlewars.scenes.ProfileSelectSceneBuilder;
+import castlewars.scenes.ProfileSelectSceneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -22,8 +22,8 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        ProfileSelectSceneBuilder pssb = new ProfileSelectSceneBuilder();
-        stage.setScene(pssb.buildScene());
+        ProfileSelectSceneController pssc = new ProfileSelectSceneController();
+        stage.setScene(pssc.buildScene());
         stage.show();
     }
     
