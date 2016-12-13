@@ -9,6 +9,21 @@ import javafx.scene.Scene;
  */
 public abstract class BaseSceneController implements Initializable{
     
-    public abstract Scene buildScene() throws Exception;
+    protected final String fxmlPath;
+
+    /**
+     * 
+     * @param fxmlPath 
+     */
+    public BaseSceneController(String fxmlPath) {
+        this.fxmlPath = fxmlPath;
+    }
+    
+    /**
+     * Builds scene from fxml and
+     * @return constructed scene
+     * @throws Exception 
+     */
+   // public abstract Scene buildScene() throws Exception;
     
 }

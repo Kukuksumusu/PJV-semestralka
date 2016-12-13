@@ -4,14 +4,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * FXML Controller class
@@ -25,8 +22,11 @@ public class ProfileSelectSceneController extends BaseSceneController {
     
     @FXML
     private VBox vBoxProfiles;
+
+    public ProfileSelectSceneController() {
+        super("profileSelectScene.fxml");
+    }
    
-    private final String fxmlPath = "profileSelectScene.fxml";
     /**
      * Initializes the controller class.
      * @param url
@@ -40,7 +40,8 @@ public class ProfileSelectSceneController extends BaseSceneController {
         //and so on, and so forth
     }    
 
-    @Override
+  //  @Override
+    //move this to initialize
     public Scene buildScene() throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
         Scene scene = new Scene(root);   
