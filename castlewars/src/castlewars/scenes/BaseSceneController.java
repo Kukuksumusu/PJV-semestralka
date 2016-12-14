@@ -9,7 +9,7 @@ import javafx.scene.Scene;
  */
 public abstract class BaseSceneController implements Initializable{
     
-    protected final String fxmlPath;
+  protected final String fxmlPath;
 
     /**
      * 
@@ -18,12 +18,5 @@ public abstract class BaseSceneController implements Initializable{
     public BaseSceneController(String fxmlPath) {
         this.fxmlPath = fxmlPath;
     }
-    
-    /**
-     * Builds scene from fxml and
-     * @return constructed scene
-     * @throws Exception 
-     */
-   // public abstract Scene buildScene() throws Exception;
     
 }

@@ -10,6 +10,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
+
 /**
  * FXML Controller class
  *
@@ -26,7 +27,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
     public ProfileSelectSceneController() {
         super("profileSelectScene.fxml");
     }
-   
+  
     /**
      * Initializes the controller class.
      * @param url
