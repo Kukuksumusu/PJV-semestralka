@@ -1,7 +1,7 @@
 package castlewars.scenes;
 
+import castlewars.Launcher;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 
 /**
  *
@@ -9,14 +9,9 @@ import javafx.scene.Scene;
  */
 public abstract class BaseSceneController implements Initializable{
     
-  protected final String fxmlPath;
-
-    /**
-     * 
-     * @param fxmlPath 
-     */
-    public BaseSceneController(String fxmlPath) {
-        this.fxmlPath = fxmlPath;
-    }
+    protected Launcher application;
     
+    public void setApp(Launcher app) {
+        application = app;
+    }
 }

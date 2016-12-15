@@ -7,41 +7,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" gridLinesVisible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="castlewars.scenes.ProfileSelectSceneController">
-  <children>
-    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowSpan="3">
-      <content>
-        <VBox fx:id="vBoxProfiles" alignment="CENTER" spacing="20.0">
-          <children>
-            <RadioButton mnemonicParsing="false" text="RadioButton">
-              <font>
-                <Font size="26.0" fx:id="x1" />
-              </font>
-              <toggleGroup>
-                <ToggleGroup fx:id="profiles" />
-              </toggleGroup>
-            </RadioButton>
-            <RadioButton font="$x1" mnemonicParsing="false" text="RadioButton" toggleGroup="$profiles" />
-            <RadioButton font="$x1" mnemonicParsing="false" text="RadioButton" toggleGroup="$profiles" />
-          </children>
-        </VBox>
-      </content>
-    </ScrollPane>
-    <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="-1.0" text="New profile" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="-1.0" text="Select profile" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-  </children>
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-</GridPane>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="castlewars.scenes.ProfileSelectSceneController">
+   <children>
+      <GridPane alignment="CENTER" gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+          <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
+            <content>
+              <VBox fx:id="vBoxProfiles" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" />
+            </content>
+          </ScrollPane>
+          <Button fx:id="newProfile" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="-1.0" text="New profile" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+          <Button fx:id="selectProfile" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" prefWidth="-1.0" text="Select profile" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+        </children>
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="80.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="80.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="80.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="ALWAYS" />
+        </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

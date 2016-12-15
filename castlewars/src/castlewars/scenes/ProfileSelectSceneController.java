@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 
 /**
@@ -17,16 +19,16 @@ import javafx.scene.layout.VBox;
  * @author Jakub
  */
 public class ProfileSelectSceneController extends BaseSceneController {
-
-    @FXML
-    private ToggleGroup profiles;
     
     @FXML
     private VBox vBoxProfiles;
+    
+    @FXML
+    private Button newProfile;
+    
+    @FXML
+    private Button selectProfile;
 
-    public ProfileSelectSceneController() {
-        super("profileSelectScene.fxml");
-    }
   
     /**
      * Initializes the controller class.
@@ -35,19 +37,17 @@ public class ProfileSelectSceneController extends BaseSceneController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ToggleButton btn = new ToggleButton("1");
+        ToggleGroup profiles = new ToggleGroup();
+        Font font = newProfile.getFont();
+        ToggleButton btn = new ToggleButton("Button A");
         btn.setToggleGroup(profiles);
+        btn.setFont(font);
+        vBoxProfiles.getChildren().add(btn);
+        btn = new ToggleButton("Button B");
+        btn.setToggleGroup(profiles);
+        btn.setFont(font);
         vBoxProfiles.getChildren().add(btn);
         //and so on, and so forth
     }    
-
-  //  @Override
-    //move this to initialize
-    public Scene buildScene() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-        Scene scene = new Scene(root);   
-        //scene.getStylesheets().add("javafx_cviceni/layout.css");
-        return scene;     
-    }
     
 }
