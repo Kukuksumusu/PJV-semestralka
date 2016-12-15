@@ -33,7 +33,11 @@ public class Launcher extends Application {
         stage.show();
     }
     
-    
+        /**
+         * Replaces current scene with one specified in given fxml
+         * @param fxml path to fxml
+         * @throws Exception 
+         */
         private void replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Launcher.class.getResourceAsStream(fxml);

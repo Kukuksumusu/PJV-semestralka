@@ -6,7 +6,7 @@
 package castlewars;
 
 /**
- *
+ * Enum for paths to fxml files
  * @author Kukuksumusu
  */
 public enum fxmlPaths {

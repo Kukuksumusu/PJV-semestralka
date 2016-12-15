@@ -4,7 +4,7 @@ import castlewars.Launcher;
 import javafx.fxml.Initializable;
 
 /**
- *
+ * Abstract class for all controllers
  * @author Kukuksumusu
  */
 public abstract class BaseSceneController implements Initializable{
