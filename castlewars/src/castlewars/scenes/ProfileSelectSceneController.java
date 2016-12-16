@@ -1,5 +1,6 @@
 package castlewars.scenes;
 
+import castlewars.User;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,7 +40,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
     @FXML
     private Button selectProfile;
 
-  
+    private ToggleGroup profiles;
     /**
      * Initializes the controller class.
      * @param url
@@ -52,24 +53,32 @@ public class ProfileSelectSceneController extends BaseSceneController {
     @Override
     public void postInit() {
         try {
-            ToggleGroup profiles = new ToggleGroup();
+            profiles = new ToggleGroup();
             Connection conn = application.getConnection();
             
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM PROFILES");
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
+            ResultSet rs = conn.prepareStatement("SELECT * FROM PROFILES").executeQuery();
             while (rs.next()) {
-                Font font = newProfile.getFont();
-                ToggleButton btn = new ToggleButton(rs.getString("NAME"));
-                btn.setToggleGroup(profiles);
-                btn.setFont(font);
-                vBoxProfiles.getChildren().add(btn);
+                addProfileButton(rs.getString("name"));
             }
             //and so on, and so forth
         } catch (SQLException ex) {
             Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /**
+     * Adds toggle button for selection of profile
+     * @param name 
+     */
+    private void addProfileButton(String name) {
+        Font font = newProfile.getFont();
+        ToggleButton btn = new ToggleButton(name);
+        btn.setToggleGroup(profiles);
+        btn.setFont(font);
+        vBoxProfiles.getChildren().add(btn);
+    }
+    /**
+     * Handles creating new profile
+     */
     public void createHandler() {
         System.out.println("creating new");
         TextInputDialog dialog = new TextInputDialog("");
@@ -77,7 +86,18 @@ public class ProfileSelectSceneController extends BaseSceneController {
         dialog.setHeaderText("Please enter your name.");
         //dialog.setContentText("Please enter your name:");
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(name -> System.out.println("Your name: " + name));
+        result.ifPresent((String name) -> {
+            try {
+                User user = new User(application.getConnection(), name);
+                user.writeToDb();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (User.AlreadyExistsException e) {
+                System.out.println("Profile with this name already exists");
+                return;
+            }
+            addProfileButton(name);
+        });
     }
-    
+
 }

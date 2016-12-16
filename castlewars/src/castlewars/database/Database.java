@@ -47,10 +47,10 @@ public class Database {
         if (!rs.next()) {
             Statement s = connection.createStatement();
             s.executeUpdate("CREATE TABLE PROFILES"
-                        + "(ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
-                        + "NAME VARCHAR(50),"
-                        + "UNIQUE (NAME)"
-                        + "PRIMARY KEY (ID))");
+                        + "(id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+                        + "name VARCHAR(50),"
+                        + "UNIQUE (name),"
+                        + "PRIMARY KEY (id))");
         }
     }
 }
