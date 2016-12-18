@@ -24,7 +24,11 @@ public class User {
             this.id = rs.getInt("id");
         }
     }
-   
+   /**
+    * Inserts user into database
+    * @throws SQLException
+    * @throws castlewars.User.AlreadyExistsException 
+    */
     public void writeToDb() throws SQLException, AlreadyExistsException {
         PreparedStatement ps = connection.prepareStatement("INSERT INTO PROFILES (name) VALUES (?)");
         ps.setString(1, name);
@@ -35,9 +39,20 @@ public class User {
             throw new AlreadyExistsException();
         }
     }
-
+    /**
+     * Deletes user from database
+     * @return true if user was deleted
+     * @throws SQLException 
+     */
+    public boolean deleteProfile() throws SQLException {
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM PROFILES WHERE id = ? AND name = ?");
+        ps.setInt(1, id);
+        ps.setString(2, name);
+        return ps.executeUpdate() != 0;
+    }
+    
     public static class AlreadyExistsException extends Exception {
-
+        
         public AlreadyExistsException() {
         }
     }

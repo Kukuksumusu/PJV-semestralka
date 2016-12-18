@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Dec 16 17:18:34 CET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0159-086d-8b53-000002d80000 
-on database directory D:\PJV\PJV-semestralka\castlewars\database with class loader sun.misc.Launcher$AppClassLoader@6d06d69c 
-Loaded from file:/D:/PJV/PJV-semestralka/castlewars/derby_jarfiles/derby.jar
+Sat Dec 17 19:07:34 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0159-0df7-b521-00000696d2f0 
+on database directory E:\PJV\PJV-semestralka\castlewars\database with class loader sun.misc.Launcher$AppClassLoader@6d06d69c 
+Loaded from file:/E:/PJV/PJV-semestralka/castlewars/derby_jarfiles/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_101-b13
-user.dir=D:\PJV\PJV-semestralka\castlewars
+java.runtime.version=1.8.0_91-b15
+user.dir=E:\PJV\PJV-semestralka\castlewars
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

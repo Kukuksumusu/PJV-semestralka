@@ -50,7 +50,7 @@ public class Launcher extends Application {
          * @param fxml path to fxml
          * @throws Exception 
          */
-        private void replaceSceneContent(String fxml) throws Exception {
+        public void replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Launcher.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
