@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Sat Dec 17 19:07:34 CET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0159-0df7-b521-00000696d2f0 
+Sun Dec 18 21:30:35 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0159-13a1-0040-000006930b80 
 on database directory E:\PJV\PJV-semestralka\castlewars\database with class loader sun.misc.Launcher$AppClassLoader@6d06d69c 
 Loaded from file:/E:/PJV/PJV-semestralka/castlewars/derby_jarfiles/derby.jar
 java.vendor=Oracle Corporation

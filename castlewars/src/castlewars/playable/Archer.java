@@ -10,7 +10,6 @@ package castlewars.playable;
 public class Archer extends AttackCard {
   
     public Archer() {
-        super("Archer", new Cost(0, 3, 0), 5);
+        super("Archer", "Deal 5 damage", new Cost(0, 3, 0), 5);
     }
-    
 }

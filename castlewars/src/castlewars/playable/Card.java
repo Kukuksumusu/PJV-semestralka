@@ -9,9 +9,11 @@ import castlewars.Castle;
 public abstract class Card implements Playable{
     private final Cost cost;
     private final String name;
+    private final String description;
 
-    public Card(String name, Cost cost) {
+    public Card(String name, String description, Cost cost) {
         this.name = name;
+        this.description = description;
         this.cost = cost;
     }
 
@@ -19,19 +21,25 @@ public abstract class Card implements Playable{
     public String getName() {
         return name;
     }
-    
+    @Override
+    public String getDescription() {
+        return description;
+    }
     @Override
     public Cost getCost() {
         return cost;
     }
-    
     @Override
     public boolean canPlay(Castle castle) {
         return (castle.getBricks() >= getCost().getBricks()) && 
                 (castle.getWeapons() >= getCost().getBricks()) &&
                 (castle.getWeapons() >= getCost().getWeapons());
     }
-    
+    /**
+     * Expends resources needed to play this card
+     * @param castle from which you want to deduce the cost
+     * @throws castlewars.playable.Playable.CanNotPlayException if the castle can not afford to play this card
+     */
     protected void deductCost(Castle castle) throws CanNotPlayException {
         if (!canPlay(castle)) {
             throw new CanNotPlayException();

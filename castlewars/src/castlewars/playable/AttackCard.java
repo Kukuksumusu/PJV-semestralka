@@ -9,8 +9,8 @@ import castlewars.Castle;
 public abstract class AttackCard extends Card{
     protected final int dmg;
 
-    public AttackCard(String name, Cost cost, int dmg) {
-        super(name, cost);
+    public AttackCard(String name, String description, Cost cost, int dmg) {
+        super(name, description, cost);
         this.dmg = dmg;
     }
     

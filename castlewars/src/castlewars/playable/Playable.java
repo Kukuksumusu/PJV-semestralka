@@ -29,7 +29,10 @@ public interface Playable {
      * @return name of the card
      */
     public String getName();
-    
+    /**
+     * @return card description (effect)
+     */
+    public String getDescription();
     /**
      * Exception signalizing that game ended
      */

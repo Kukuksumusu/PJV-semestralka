@@ -2,9 +2,9 @@ package castlewars.scenes;
 
 import castlewars.User;
 import castlewars.fxmlPaths;
+import castlewars.playable.Archer;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -12,11 +12,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -25,11 +23,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 
 /**
@@ -138,5 +132,12 @@ public class ProfileSelectSceneController extends BaseSceneController {
                 Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } 
+    }
+    /**
+     * Handles selection of profile
+     * @param event
+     */
+    public void handleSelect(Event event) {
+        vBoxProfiles.getChildren().add(CardPaneBuilder.buildPane(new Archer(), this::handleSelect));
     }
 }
