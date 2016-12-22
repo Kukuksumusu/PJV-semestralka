@@ -2,7 +2,6 @@ package castlewars.scenes;
 
 import castlewars.User;
 import castlewars.fxmlPaths;
-import castlewars.playable.Archer;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -141,6 +140,21 @@ public class ProfileSelectSceneController extends BaseSceneController {
      * @param event
      */
     public void handleSelect(Event event) {
-        vBoxProfiles.getChildren().add(CardPaneBuilder.buildPane(new Archer(), this::handleSelect));
+        try {
+            if(profiles.getSelectedToggle() == null) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("No profile selected");
+                alert.setHeaderText("Please select a profile");
+                alert.showAndWait();
+                return;
+            }
+            System.out.println(((ToggleButton)profiles.getSelectedToggle()).getText());
+            application.setPlayer(new User(application.getConnection(), ((ToggleButton)profiles.getSelectedToggle()).getText()));
+            application.replaceSceneContent(fxmlPaths.GAME.getPath());
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

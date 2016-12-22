@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
  * @author Kukuksumusu
  */
 public class CardPaneBuilder {
-    public static TitledPane buildPane(Playable card, EventHandler handler) {
+    public static TitledPane buildPane(Playable card, EventHandler handler, int id) {
         VBox box = new VBox();
         Card.Cost cost = card.getCost();
         if (cost.getBricks() > 0) {
@@ -33,9 +33,10 @@ public class CardPaneBuilder {
         TitledPane cardPane = new TitledPane(card.getName(), box);
         cardPane.setCollapsible(false);
         cardPane.setAlignment(Pos.CENTER);
-        //cardPane.setCursor(Cursor.HAND);
+        cardPane.setCursor(Cursor.HAND);
         cardPane.setOnMouseClicked(handler);
-        //cardPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        cardPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        cardPane.setId(Integer.toString(id));
         return cardPane;
     }
 }

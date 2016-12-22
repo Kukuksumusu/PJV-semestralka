@@ -10,7 +10,8 @@ package castlewars;
  * @author Kukuksumusu
  */
 public enum fxmlPaths {
-    PROFILE("profileSelectScene.fxml");
+    PROFILE("profileSelectScene.fxml"),
+    GAME("gameScene.fxml");
     
     private final String name;
     private final String PREFIX = "scenes/";

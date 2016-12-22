@@ -22,6 +22,11 @@ public class Launcher extends Application {
     private Database db;
     
     private Connection connection;
+    
+    private GameController gameController;
+    
+    private User player;
+    
     /**
      * @param args the command line arguments
      */
@@ -35,6 +40,7 @@ public class Launcher extends Application {
         db = new Database();
         connection = db.getConnection();
         stage = primaryStage;
+        gameController = new GameController(this);
         replaceSceneContent(fxmlPaths.PROFILE.getPath());
         stage.show();
     }
@@ -62,15 +68,26 @@ public class Launcher extends Application {
         Scene scene = new Scene(page, 800, 600);
         stage.setScene(scene);
         stage.sizeToScene();
-        
     }
 
     public Connection getConnection() {
         return connection;
     }
 
+    public GameController getGameController() {
+        return gameController;
+    }
+    
     public Stage getStage() {
         return stage;
+    }
+
+    public User getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(User player) {
+        this.player = player;
     }
     
     

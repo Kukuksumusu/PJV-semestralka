@@ -44,9 +44,9 @@ public abstract class Card implements Playable{
         if (!canPlay(castle)) {
             throw new CanNotPlayException();
         }
-        castle.changeBricks(getCost().getBricks());
-        castle.changeWeapons(getCost().getWeapons());
-        castle.changeCrystals(getCost().getCrystals());
+        castle.changeBricks(-(getCost().getBricks()));
+        castle.changeWeapons(-(getCost().getWeapons()));
+        castle.changeCrystals(-(getCost().getCrystals()));
     }
     
     /**
