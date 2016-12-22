@@ -104,7 +104,10 @@ public class ProfileSelectSceneController extends BaseSceneController {
             } catch (SQLException ex) {
                 Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (User.AlreadyExistsException e) {
-                System.out.println("Profile with this name already exists");
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Can not create profile");
+                alert.setHeaderText("Profile '" + name + "' already exists");
+                alert.showAndWait();
                 return;
             }
             addProfileButton(name);

@@ -13,8 +13,6 @@ import org.apache.derby.jdbc.EmbeddedDataSource;
  */
 public class Database {
     private final String URL = ".";
-    private final String USERNAME = "testovaci";
-    private final String PASSWORD = "heslo";
     private final Connection connection;
 
     /**
@@ -25,8 +23,6 @@ public class Database {
         EmbeddedDataSource eds = new EmbeddedDataSource();
         eds.setDatabaseName(URL + "/database");
         eds.setCreateDatabase("create");
-        eds.setUser(USERNAME);
-        eds.setPassword(PASSWORD);
         connection = eds.getConnection();
         init();
     }
@@ -45,6 +41,8 @@ public class Database {
         DatabaseMetaData md = connection.getMetaData();
         ResultSet rs = md.getTables(null, null, "PROFILES", null);
         if (!rs.next()) {
+            
+            System.out.println("Creating Database");
             Statement s = connection.createStatement();
             s.executeUpdate("CREATE TABLE PROFILES"
                         + "(id INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
