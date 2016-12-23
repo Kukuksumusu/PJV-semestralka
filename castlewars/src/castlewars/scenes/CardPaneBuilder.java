@@ -33,8 +33,10 @@ public class CardPaneBuilder {
         TitledPane cardPane = new TitledPane(card.getName(), box);
         cardPane.setCollapsible(false);
         cardPane.setAlignment(Pos.CENTER);
-        cardPane.setCursor(Cursor.HAND);
-        cardPane.setOnMouseClicked(handler);
+        if (handler != null) {
+            cardPane.setCursor(Cursor.HAND);
+            cardPane.setOnMouseClicked(handler);
+        }
         cardPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         cardPane.setId(Integer.toString(id));
         return cardPane;

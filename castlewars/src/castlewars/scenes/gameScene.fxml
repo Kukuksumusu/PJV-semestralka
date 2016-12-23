@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -21,33 +22,342 @@
          <children>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="444.0" prefWidth="588.0" spacing="25.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                <children>
-                  <AnchorPane fx:id="card1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#playCardHandle" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="card1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane fx:id="card2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#playCardHandle" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="card2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane fx:id="card3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#playCardHandle" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="card3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane fx:id="card4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#playCardHandle" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="card4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </AnchorPane>
-                  <AnchorPane fx:id="card5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#playCardHandle" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <AnchorPane fx:id="card5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </AnchorPane>
                </children>
             </HBox>
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="180.0" style="-fx-border-color: grey;" GridPane.columnIndex="2">
+                     <children>
+                        <Label alignment="CENTER" text="Enemy Castle">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Builders:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentBuilders" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bricks:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentBricks" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weaponsmiths:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentWeaponsmiths" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weapons:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentWeapons" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mages:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentMages" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Crystals:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentCrystals" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hp" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentCastleHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Wall" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="opponentWallHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="180.0" style="-fx-border-color: grey;">
+                     <children>
+                        <Label alignment="CENTER" text="Your Castle">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Builders:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerBuilders" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bricks:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerBricks" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weaponsmiths:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerWeaponsmiths" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weapons:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerWeapons" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mages:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerMages" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Crystals:" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerCrystals" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <Separator prefWidth="200.0" />
+                        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hp" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerCastleHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                        <BorderPane>
+                           <left>
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Wall" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </Label>
+                           </left>
+                           <right>
+                              <Label fx:id="playerWallHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <GridPane hgap="10.0" GridPane.columnIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <AnchorPane fx:id="cardLastPlayed" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#playCardHandle" prefWidth="100.0" style="-fx-border-color: black;" GridPane.columnIndex="1">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </AnchorPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" />

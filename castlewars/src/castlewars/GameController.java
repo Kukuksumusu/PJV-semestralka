@@ -60,15 +60,29 @@ public class GameController {
         return playerHand;
     }
 
-    public void playCard(int positionInHand) {
+    /**
+     * plays card on the specified position in players hand
+     * @param positionInHand
+     * @return played card
+     */
+    public Card playCard(int positionInHand) {
+        Card played = playerHand.remove(positionInHand);
         try {
-            playerHand.remove(positionInHand).play(playerCastle, opponentCastle);
+            played.play(playerCastle, opponentCastle);
         } catch (Playable.GameEnd ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Playable.CanNotPlayException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         playerHand.add(positionInHand, playerDeck.draw());
+        return played;
     }
     
+    public Castle getPlayerCastle() {
+        return playerCastle;
+    }
+    
+    public Castle getOpponentCastle() {
+        return opponentCastle;
+    }
 }
