@@ -126,7 +126,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
         if (result.get() == ButtonType.OK){
             try {
                 if (new User(application.getConnection(), deleteID).deleteProfile()) {
-                    application.replaceSceneContent(fxmlPaths.PROFILE.getPath());
+                    application.replaceSceneContent(fxmlPaths.PROFILE);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,7 +150,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
             }
             System.out.println(((ToggleButton)profiles.getSelectedToggle()).getText());
             application.setPlayer(new User(application.getConnection(), ((ToggleButton)profiles.getSelectedToggle()).getText()));
-            application.replaceSceneContent(fxmlPaths.GAME.getPath());
+            application.replaceSceneContent(fxmlPaths.GAME);
         } catch (SQLException ex) {
             Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

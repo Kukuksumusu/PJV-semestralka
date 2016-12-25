@@ -3,6 +3,7 @@ package castlewars;
 import castlewars.playable.Archer;
 import castlewars.playable.Card;
 import castlewars.playable.Playable;
+import castlewars.scenes.GameSceneController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -12,7 +13,8 @@ import java.util.logging.Logger;
  * Class that contains the game logic
  * @author Kukuksumusu
  */
-public class GameController {
+public class GameController{
+    private final int DELAY = 1000;
     private final int STARTING_CASTLE_HP = 30;
     private final int STARTING_WALL_HP = 10;
     private final int STARTING_RESOURCE_MAKERS = 3;
@@ -24,9 +26,15 @@ public class GameController {
     private Deck opponentDeck;
     private List<Card> playerHand;
     private List<Card> opponentHand;
+    private GameSceneController sceneController;
+    /**
+     * dummy object used for synchronization
+     */
+    public final Object syncObject;
 
     public GameController(Launcher application) {
         this.application = application;
+        syncObject = new Object();
     }
     /**
      * initializes stuff for the game to be able to start
@@ -44,6 +52,8 @@ public class GameController {
         for (int i = 0; i < 5; i++) {
             playerHand.add(playerDeck.draw());
         }
+        sceneController.displayPlayerHand(playerHand);
+        sceneController.displayCastles(playerCastle, opponentCastle, 0);
     }
 
     private Deck loadDeck(User player) {
@@ -63,9 +73,8 @@ public class GameController {
     /**
      * plays card on the specified position in players hand
      * @param positionInHand
-     * @return played card
      */
-    public Card playCard(int positionInHand) {
+    public void playCard(int positionInHand) {
         Card played = playerHand.remove(positionInHand);
         try {
             played.play(playerCastle, opponentCastle);
@@ -75,7 +84,19 @@ public class GameController {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         playerHand.add(positionInHand, playerDeck.draw());
-        return played;
+        sceneController.displayCastles(playerCastle, opponentCastle, DELAY);
+        sceneController.displayLastPlayed(played);
+        try {
+            synchronized(syncObject) {
+                syncObject.wait();
+            }
+            Thread.sleep(DELAY/3);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        opponentCastle.nextTurn();
+        sceneController.displayCastles(playerCastle, opponentCastle, DELAY);
+        //sceneController.displayPlayerHand(playerHand); 
     }
     
     public Castle getPlayerCastle() {
@@ -84,5 +105,9 @@ public class GameController {
     
     public Castle getOpponentCastle() {
         return opponentCastle;
+    }
+
+    public void setSceneController(GameSceneController sceneController) {
+        this.sceneController = sceneController;
     }
 }

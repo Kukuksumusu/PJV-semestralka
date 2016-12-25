@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package castlewars;
 
 /**
@@ -10,18 +5,27 @@ package castlewars;
  * @author Kukuksumusu
  */
 public enum fxmlPaths {
-    PROFILE("profileSelectScene.fxml"),
-    GAME("gameScene.fxml");
+    PROFILE("profileSelectScene.fxml", null),
+    GAME("gameScene.fxml", "gameScene.css");
     
     private final String name;
+    private final String css;
     private final String PREFIX = "scenes/";
+    private final String CSSPREFIX = "castlewars/scenes/css/";
     
-    private fxmlPaths(String name) {
+    private fxmlPaths(String name, String css) {
         this.name = name;
+        this.css = css;
     }
 
     public String getPath() {
         return PREFIX + name;
     }
     
+    public String getCSS() {
+        if (css != null) {
+            return CSSPREFIX + css;
+        }
+        return null;
+    }
 }

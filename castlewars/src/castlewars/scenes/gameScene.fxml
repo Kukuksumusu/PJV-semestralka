@@ -8,7 +8,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="471.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="castlewars.scenes.GameSceneController">
    <children>
       <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -67,9 +66,9 @@
                            </font>
                         </Label>
                         <Separator prefWidth="200.0" />
-                        <BorderPane>
+                        <BorderPane stylesheets="@gameScene.css">
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Builders:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Builders:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -81,10 +80,23 @@
                            <right>
                               <Label fx:id="opponentBuilders" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentBuildersChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bricks:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Bricks:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -99,11 +111,24 @@
                            <right>
                               <Label fx:id="opponentBricks" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentBricksChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <Separator prefWidth="200.0" />
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weaponsmiths:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Weaponsmiths:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -115,10 +140,23 @@
                            <right>
                               <Label fx:id="opponentWeaponsmiths" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentWeaponsmithsChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weapons:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Weapons:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -130,11 +168,24 @@
                            <right>
                               <Label fx:id="opponentWeapons" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentWeaponsChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <Separator prefWidth="200.0" />
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mages:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Mages:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -146,10 +197,23 @@
                            <right>
                               <Label fx:id="opponentMages" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentMagesChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Crystals:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Crystals:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -161,12 +225,25 @@
                            <right>
                               <Label fx:id="opponentCrystals" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentCrystalsChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <Separator prefWidth="200.0" />
                         <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hp" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Hp" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -178,10 +255,23 @@
                            <right>
                               <Label fx:id="opponentCastleHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentCastleHpChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Wall" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Wall" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -193,6 +283,19 @@
                            <right>
                               <Label fx:id="opponentWallHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="opponentWallHpChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                      </children>
                      <opaqueInsets>
@@ -209,7 +312,7 @@
                         <Separator prefWidth="200.0" />
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Builders:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Builders:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -221,10 +324,23 @@
                            <right>
                               <Label fx:id="playerBuilders" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerBuildersChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bricks:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Bricks:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -239,11 +355,24 @@
                            <right>
                               <Label fx:id="playerBricks" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerBricksChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <Separator prefWidth="200.0" />
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weaponsmiths:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Weaponsmiths:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -255,10 +384,23 @@
                            <right>
                               <Label fx:id="playerWeaponsmiths" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerWeaponsmithsChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Weapons:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Weapons:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -270,11 +412,24 @@
                            <right>
                               <Label fx:id="playerWeapons" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerWeaponsChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <Separator prefWidth="200.0" />
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mages:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Mages:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -286,10 +441,23 @@
                            <right>
                               <Label fx:id="playerMages" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerMagesChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Crystals:" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Crystals:" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -301,12 +469,25 @@
                            <right>
                               <Label fx:id="playerCrystals" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerCrystalsChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <Separator prefWidth="200.0" />
                         <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hp" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Hp" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -318,10 +499,23 @@
                            <right>
                               <Label fx:id="playerCastleHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerCastleHpChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                         <BorderPane>
                            <left>
-                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Wall" BorderPane.alignment="CENTER">
+                              <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="130.0" text="Wall" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -333,6 +527,19 @@
                            <right>
                               <Label fx:id="playerWallHp" alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="0" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <Label fx:id="playerWallHpChange" text="0" textFill="WHITE" visible="false" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <padding>
+                                    <Insets left="2.0" right="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </center>
                         </BorderPane>
                      </children>
                      <opaqueInsets>

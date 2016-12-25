@@ -41,7 +41,7 @@ public class Launcher extends Application {
         connection = db.getConnection();
         stage = primaryStage;
         gameController = new GameController(this);
-        replaceSceneContent(fxmlPaths.PROFILE.getPath());
+        replaceSceneContent(fxmlPaths.PROFILE);
         stage.show();
     }
     
@@ -50,11 +50,11 @@ public class Launcher extends Application {
          * @param fxml path to fxml
          * @throws Exception 
          */
-        public void replaceSceneContent(String fxml) throws Exception {
+        public void replaceSceneContent(fxmlPaths fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        InputStream in = Launcher.class.getResourceAsStream(fxml);
+        InputStream in = Launcher.class.getResourceAsStream(fxml.getPath());
         loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(Launcher.class.getResource(fxml));
+        loader.setLocation(Launcher.class.getResource(fxml.getPath()));
         Pane page;
         try {
             page = (Pane) loader.load(in);
@@ -66,6 +66,9 @@ public class Launcher extends Application {
         sceneController.postInit();
         
         Scene scene = new Scene(page, 800, 600);
+        if (fxml.getCSS() != null) {
+            scene.getStylesheets().add(fxml.getCSS());
+        }
         stage.setScene(scene);
         stage.sizeToScene();
     }

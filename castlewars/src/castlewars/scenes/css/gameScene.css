@@ -1,0 +1,6 @@
+.increase {
+    -fx-background-color: green;
+}
+.decrease {
+    -fx-background-color: red;
+}

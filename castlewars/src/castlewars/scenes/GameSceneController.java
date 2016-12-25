@@ -11,18 +11,15 @@ import castlewars.playable.Card;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.animation.PathTransition;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -75,6 +72,39 @@ public class GameSceneController extends BaseSceneController {
     private Label playerWallHp;
     @FXML
     private AnchorPane cardLastPlayed;   
+    @FXML
+    private Label opponentBuildersChange;
+    @FXML
+    private Label opponentBricksChange;
+    @FXML
+    private Label opponentWeaponsmithsChange;
+    @FXML
+    private Label opponentWeaponsChange;
+    @FXML
+    private Label opponentMagesChange;
+    @FXML
+    private Label opponentCrystalsChange;
+    @FXML
+    private Label opponentCastleHpChange;
+    @FXML
+    private Label opponentWallHpChange;
+    @FXML
+    private Label playerBuildersChange;
+    @FXML
+    private Label playerBricksChange;
+    @FXML
+    private Label playerWeaponsmithsChange;
+    @FXML
+    private Label playerWeaponsChange;
+    @FXML
+    private Label playerMagesChange;
+    @FXML
+    private Label playerCrystalsChange;
+    @FXML
+    private Label playerCastleHpChange;
+    @FXML
+    private Label playerWallHpChange;
+    
     
     private GameController gameController;
 
@@ -92,33 +122,41 @@ public class GameSceneController extends BaseSceneController {
     @Override
     public void postInit() {
         gameController = application.getGameController();
+        gameController.setSceneController(this);
         gameController.gameStart();
-        displayPlayerHand();
-        displayCastles();
+        
     }
     
     @FXML
     private void playCardHandle(Event event) {
-        Card lastPlayedCard = gameController.playCard(Integer.parseInt(((TitledPane)event.getSource()).getId()));
-        TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0);
-        setCardToFill(lastPlayed);
-        cardLastPlayed.getChildren().add(lastPlayed);
-        ((TitledPane)event.getSource()).setVisible(false);
-        displayCastles();
-        displayPlayerHand();
+        TitledPane source = (TitledPane)event.getSource();
+        /*Card lastPlayedCard = gameController.playCard(Integer.parseInt(source.getId()));
+        */
+        source.setVisible(false);
+        //displayCastles();
+        Task <Void> task = new Task<Void>() {
+            @Override public Void call() throws InterruptedException {
+                gameController.playCard(Integer.parseInt(source.getId()));
+                return null;
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
-    private void displayPlayerHand() {
-        List<Card> hand = gameController.getPlayerHand();
+    public void displayPlayerHand(List<Card> hand) {
         AnchorPane[] cardPanes = {card1, card2, card3, card4, card5};
-        for (int i = 0; i < 5; i++) {
-            TitledPane card = CardPaneBuilder.buildPane(hand.get(i), this::playCardHandle, i);
-            if (!hand.get(i).canPlay(gameController.getPlayerCastle())) {
-                card.setDisable(true);
+        Platform.runLater(() -> {
+            for (int i = 0; i < 5; i++) {
+                TitledPane card = CardPaneBuilder.buildPane(hand.get(i), this::playCardHandle, i);
+                if (!hand.get(i).canPlay(gameController.getPlayerCastle())) {
+                    card.setDisable(true);
+                }
+                setCardToFill(card);
+                cardPanes[i].getChildren().setAll(card);
             }
-            setCardToFill(card);
-            cardPanes[i].getChildren().setAll(card);
-        }
+        });
     }
     /**
      * Makes card fill her parent AnchorPane
@@ -131,30 +169,97 @@ public class GameSceneController extends BaseSceneController {
         AnchorPane.setRightAnchor(card, 0.0);
     }
     /**
-     * Overwrites current displayed values with correct ones
+     * Overwrites displayed values with correct ones
+     * @param playerCastle
+     * @param opponentCastle
+     * @param hideChangesAfter how long should be labels with changed values displayed
      */
-    private void displayCastles() {
-        Castle playerCastle = gameController.getPlayerCastle();
-        playerBuilders.setText(Integer.toString(playerCastle.getBuilders()));
-        playerBricks.setText(Integer.toString(playerCastle.getBricks()));
-        playerWeaponsmiths.setText(Integer.toString(playerCastle.getWeaponsmiths()));
-        playerWeapons.setText(Integer.toString(playerCastle.getWeapons()));
-        playerMages.setText(Integer.toString(playerCastle.getMages()));
-        playerCrystals.setText(Integer.toString(playerCastle.getCrystals()));
-        playerCastleHp.setText(Integer.toString(playerCastle.getHp()));
-        playerWallHp.setText(Integer.toString(playerCastle.getWallHp()));
-        
-        Castle opponentCastle = gameController.getOpponentCastle();
-        opponentBuilders.setText(Integer.toString(opponentCastle.getBuilders()));
-        opponentBricks.setText(Integer.toString(opponentCastle.getBricks()));
-        opponentWeaponsmiths.setText(Integer.toString(opponentCastle.getWeaponsmiths()));
-        opponentWeapons.setText(Integer.toString(opponentCastle.getWeapons()));
-        opponentMages.setText(Integer.toString(opponentCastle.getMages()));
-        opponentCrystals.setText(Integer.toString(opponentCastle.getCrystals()));
-        opponentCastleHp.setText(Integer.toString(opponentCastle.getHp()));
-        opponentWallHp.setText(Integer.toString(opponentCastle.getWallHp()));
+    public void displayCastles(Castle playerCastle, Castle opponentCastle, int hideChangesAfter) {
+        Platform.runLater(() -> {
+            displayChange(playerBuildersChange, playerCastle.getBuilders(), playerBuilders);
+            displayChange(playerBricksChange, playerCastle.getBricks(), playerBricks);
+            displayChange(playerWeaponsmithsChange, playerCastle.getWeaponsmiths(), playerWeaponsmiths);
+            displayChange(playerWeaponsChange, playerCastle.getWeapons(), playerWeapons);
+            displayChange(playerMagesChange, playerCastle.getMages(), playerMages);
+            displayChange(playerCrystalsChange, playerCastle.getCrystals(), playerCrystals);
+            displayChange(playerCastleHpChange, playerCastle.getHp(), playerCastleHp);
+            displayChange(playerWallHpChange, playerCastle.getWallHp(), playerWallHp);
+
+            displayChange(opponentBuildersChange, opponentCastle.getBuilders(), opponentBuilders);
+            displayChange(opponentBricksChange, opponentCastle.getBricks(), opponentBricks);
+            displayChange(opponentWeaponsmithsChange, opponentCastle.getWeaponsmiths(), opponentWeaponsmiths);
+            displayChange(opponentWeaponsChange, opponentCastle.getWeapons(), opponentWeapons);
+            displayChange(opponentMagesChange, opponentCastle.getMages(), opponentMages);
+            displayChange(opponentCrystalsChange, opponentCastle.getCrystals(), opponentCrystals);
+            displayChange(opponentCastleHpChange, opponentCastle.getHp(), opponentCastleHp);
+            displayChange(opponentWallHpChange, opponentCastle.getWallHp(), opponentWallHp);
+            Task <Void> task = new Task<Void>() {
+            @Override public Void call() throws InterruptedException {
+                try {
+                    Thread.sleep(hideChangesAfter);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GameSceneController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Platform.runLater(() -> {
+                    hideAllChanges();
+                    synchronized(gameController.syncObject) {
+                        gameController.syncObject.notify();
+                    }
+                });
+                return null;
+                }
+            };
+            Thread thread = new Thread(task);
+            thread.setDaemon(true);
+            thread.start();
+        });
     }
-
-
-    
+    /**
+     * Displays changed castle value
+     * @param changeLabel label where to show change (difference)
+     * @param newValue 
+     * @param origLabel label with original value 
+     */
+    private void displayChange(Label changeLabel, int newValue, Label origLabel) {
+        int origValue = Integer.parseInt(origLabel.getText());
+        origLabel.setText(Integer.toString(newValue));
+        if (newValue > origValue) {
+            changeLabel.setText("+" + Integer.toString(newValue - origValue));
+            changeLabel.getStyleClass().setAll("increase");
+            //changeLabel.getStyleClass().remove("decrease");
+            changeLabel.applyCss();
+            changeLabel.setVisible(true);
+        } else if (newValue < origValue) {
+            changeLabel.setText(Integer.toString(newValue - origValue));
+            changeLabel.getStyleClass().setAll("decrease");
+            //changeLabel.getStyleClass().remove("increase");
+            changeLabel.applyCss();
+            changeLabel.setVisible(true);
+        } else {
+            changeLabel.setVisible(false);
+        }
+    }
+    /**
+     * Hides all changeLabels
+     */
+    private void hideAllChanges() {
+        Label[] changeLabels = {playerBuildersChange, playerBricksChange, playerWeaponsmithsChange, playerWeaponsChange,
+            playerMagesChange, playerCrystalsChange, playerCastleHpChange, playerWallHpChange,
+            opponentBuildersChange, opponentBricksChange, opponentWeaponsmithsChange, opponentWeaponsChange,
+            opponentMagesChange, opponentCrystalsChange, opponentCastleHpChange, opponentWallHpChange};
+        for (Label changeLabel : changeLabels) {
+            changeLabel.setVisible(false);
+        }
+    }
+    /**
+     * Displays last played card in the appropriate slot
+     * @param lastPlayedCard 
+     */
+    public void displayLastPlayed(Card lastPlayedCard) {
+        Platform.runLater(() -> {
+            TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0);
+            setCardToFill(lastPlayed);
+            cardLastPlayed.getChildren().add(lastPlayed);
+        });
+    }
 }
