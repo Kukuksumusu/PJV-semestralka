@@ -17,6 +17,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
@@ -107,6 +108,7 @@ public class GameSceneController extends BaseSceneController {
     
     
     private GameController gameController;
+    private AnchorPane[] cardPanes; 
 
 
     /**
@@ -116,15 +118,15 @@ public class GameSceneController extends BaseSceneController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        AnchorPane[] cards = {card1, card2, card3, card4, card5};
+        cardPanes = cards;
     }
 
     @Override
     public void postInit() {
         gameController = application.getGameController();
         gameController.setSceneController(this);
-        gameController.gameStart();
-        
+        gameController.gameStart();    
     }
     
     @FXML
@@ -133,7 +135,7 @@ public class GameSceneController extends BaseSceneController {
         /*Card lastPlayedCard = gameController.playCard(Integer.parseInt(source.getId()));
         */
         source.setVisible(false);
-        //displayCastles();
+        disableCards();
         Task <Void> task = new Task<Void>() {
             @Override public Void call() throws InterruptedException {
                 gameController.playCard(Integer.parseInt(source.getId()));
@@ -146,12 +148,13 @@ public class GameSceneController extends BaseSceneController {
     }
 
     public void displayPlayerHand(List<Card> hand) {
-        AnchorPane[] cardPanes = {card1, card2, card3, card4, card5};
         Platform.runLater(() -> {
             for (int i = 0; i < 5; i++) {
                 TitledPane card = CardPaneBuilder.buildPane(hand.get(i), this::playCardHandle, i);
                 if (!hand.get(i).canPlay(gameController.getPlayerCastle())) {
                     card.setDisable(true);
+                } else {
+                    card.setDisable(false);
                 }
                 setCardToFill(card);
                 cardPanes[i].getChildren().setAll(card);
@@ -260,6 +263,18 @@ public class GameSceneController extends BaseSceneController {
             TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0);
             setCardToFill(lastPlayed);
             cardLastPlayed.getChildren().add(lastPlayed);
+        });
+    }
+    /**
+     * Disables all cards, so that player can not play anything
+     */
+    private void disableCards() {
+        Platform.runLater(() -> {
+            for (AnchorPane cardPane : cardPanes) {
+                for (Node card : cardPane.getChildren()) {
+                    card.setDisable(true);
+                }
+            }
         });
     }
 }

@@ -150,6 +150,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
             }
             System.out.println(((ToggleButton)profiles.getSelectedToggle()).getText());
             application.setPlayer(new User(application.getConnection(), ((ToggleButton)profiles.getSelectedToggle()).getText()));
+            //application.getGameController().setDifficulty(0);
             application.replaceSceneContent(fxmlPaths.GAME);
         } catch (SQLException ex) {
             Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);

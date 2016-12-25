@@ -1,5 +1,7 @@
 package castlewars;
 
+import castlewars.ai.AI;
+import castlewars.ai.BeginnerAI;
 import castlewars.playable.Archer;
 import castlewars.playable.Card;
 import castlewars.playable.Playable;
@@ -23,10 +25,10 @@ public class GameController{
     private Castle playerCastle;
     private Castle opponentCastle;
     private Deck playerDeck;
-    private Deck opponentDeck;
     private List<Card> playerHand;
-    private List<Card> opponentHand;
     private GameSceneController sceneController;
+    private int difficulty = 0;
+    private AI opponent;
     /**
      * dummy object used for synchronization
      */
@@ -47,13 +49,13 @@ public class GameController{
                 STARTING_RESOURCE_MAKERS, STARTING_RESOURCE_MAKERS, STARTING_RESOURCE_MAKERS, 
                 STARTING_RESOURCES, STARTING_RESOURCES, STARTING_RESOURCES);
         playerHand = new ArrayList<>(5);
-        opponentHand = new ArrayList<>(5);
         playerDeck = loadDeck(application.getPlayer());
         for (int i = 0; i < 5; i++) {
             playerHand.add(playerDeck.draw());
         }
         sceneController.displayPlayerHand(playerHand);
         sceneController.displayCastles(playerCastle, opponentCastle, 0);
+        opponent = buildAI();
     }
 
     private Deck loadDeck(User player) {
@@ -84,8 +86,34 @@ public class GameController{
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         playerHand.add(positionInHand, playerDeck.draw());
-        sceneController.displayCastles(playerCastle, opponentCastle, DELAY);
         sceneController.displayLastPlayed(played);
+        displayChanges();
+        //opponents turn start
+        opponentCastle.nextTurn();
+        displayChanges();
+        //play card
+        Card aiPlay = opponent.chooseCard(opponentCastle, playerCastle);
+        if (aiPlay != null) {
+            try {
+                aiPlay.play(opponentCastle, playerCastle);
+            } catch (Playable.GameEnd ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Playable.CanNotPlayException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            
+        }
+        sceneController.displayLastPlayed(aiPlay);
+        displayChanges();
+        //player turn start
+        playerCastle.nextTurn();
+        displayChanges();
+        sceneController.displayPlayerHand(playerHand); 
+    }
+    
+    private void displayChanges() {
+        sceneController.displayCastles(playerCastle, opponentCastle, DELAY);
         try {
             synchronized(syncObject) {
                 syncObject.wait();
@@ -94,9 +122,6 @@ public class GameController{
         } catch (InterruptedException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        opponentCastle.nextTurn();
-        sceneController.displayCastles(playerCastle, opponentCastle, DELAY);
-        //sceneController.displayPlayerHand(playerHand); 
     }
     
     public Castle getPlayerCastle() {
@@ -109,5 +134,16 @@ public class GameController{
 
     public void setSceneController(GameSceneController sceneController) {
         this.sceneController = sceneController;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    private AI buildAI() {
+        switch (difficulty) {
+            case 0: return new BeginnerAI();
+            default: return new BeginnerAI();
+        }
     }
 }
