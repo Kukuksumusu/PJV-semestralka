@@ -156,20 +156,10 @@ public class GameSceneController extends BaseSceneController {
                 } else {
                     card.setDisable(false);
                 }
-                setCardToFill(card);
+                CardPaneBuilder.setCardToFill(card);
                 cardPanes[i].getChildren().setAll(card);
             }
         });
-    }
-    /**
-     * Makes card fill her parent AnchorPane
-     * @param card 
-     */
-    private void setCardToFill(TitledPane card) {
-        AnchorPane.setTopAnchor(card, 0.0);
-        AnchorPane.setBottomAnchor(card, 0.0);
-        AnchorPane.setLeftAnchor(card, 0.0);
-        AnchorPane.setRightAnchor(card, 0.0);
     }
     /**
      * Overwrites displayed values with correct ones
@@ -261,7 +251,7 @@ public class GameSceneController extends BaseSceneController {
     public void displayLastPlayed(Card lastPlayedCard) {
         Platform.runLater(() -> {
             TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0);
-            setCardToFill(lastPlayed);
+            CardPaneBuilder.setCardToFill(lastPlayed);
             cardLastPlayed.getChildren().add(lastPlayed);
         });
     }

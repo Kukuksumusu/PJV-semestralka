@@ -9,7 +9,9 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -29,7 +31,7 @@ public class CardPaneBuilder {
             box.getChildren().add(new Label("Bricks: " + cost.getCrystals()));
         }
         box.getChildren().add(new Separator(Orientation.HORIZONTAL));
-        box.getChildren().add(new Label(card.getDescription()));
+        box.getChildren().add(new Text(card.getDescription()));
         TitledPane cardPane = new TitledPane(card.getName(), box);
         cardPane.setCollapsible(false);
         cardPane.setAlignment(Pos.CENTER);
@@ -40,5 +42,16 @@ public class CardPaneBuilder {
         cardPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         cardPane.setId(Integer.toString(id));
         return cardPane;
+    }
+
+    /**
+     * Makes card fill her parent AnchorPane
+     * @param card
+     */
+    public static void setCardToFill(TitledPane card) {
+        AnchorPane.setTopAnchor(card, 0.0);
+        AnchorPane.setBottomAnchor(card, 0.0);
+        AnchorPane.setLeftAnchor(card, 0.0);
+        AnchorPane.setRightAnchor(card, 0.0);
     }
 }
