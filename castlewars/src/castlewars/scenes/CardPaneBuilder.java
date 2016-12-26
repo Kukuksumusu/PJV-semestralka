@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
  * @author Kukuksumusu
  */
 public class CardPaneBuilder {
-    public static TitledPane buildPane(Playable card, EventHandler handler, int id) {
+    public static TitledPane buildPane(Playable card, EventHandler handler, int id, AnchorPane parent) {
         VBox box = new VBox();
         Card.Cost cost = card.getCost();
         if (cost.getBricks() > 0) {
@@ -31,7 +31,8 @@ public class CardPaneBuilder {
             box.getChildren().add(new Label("Bricks: " + cost.getCrystals()));
         }
         box.getChildren().add(new Separator(Orientation.HORIZONTAL));
-        box.getChildren().add(new Text(card.getDescription()));
+        Text t = new Text(card.getDescription());
+        box.getChildren().add(t);
         TitledPane cardPane = new TitledPane(card.getName(), box);
         cardPane.setCollapsible(false);
         cardPane.setAlignment(Pos.CENTER);
@@ -41,6 +42,13 @@ public class CardPaneBuilder {
         }
         cardPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         cardPane.setId(Integer.toString(id));
+        if (parent!= null) {
+        t.setWrappingWidth(parent.getPrefWidth());
+        }
+        AnchorPane.setTopAnchor(cardPane, 0.0);
+        AnchorPane.setBottomAnchor(cardPane, 0.0);
+        AnchorPane.setLeftAnchor(cardPane, 0.0);
+        AnchorPane.setRightAnchor(cardPane, 0.0);
         return cardPane;
     }
 
@@ -49,9 +57,6 @@ public class CardPaneBuilder {
      * @param card
      */
     public static void setCardToFill(TitledPane card) {
-        AnchorPane.setTopAnchor(card, 0.0);
-        AnchorPane.setBottomAnchor(card, 0.0);
-        AnchorPane.setLeftAnchor(card, 0.0);
-        AnchorPane.setRightAnchor(card, 0.0);
+
     }
 }

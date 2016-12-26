@@ -150,13 +150,12 @@ public class GameSceneController extends BaseSceneController {
     public void displayPlayerHand(List<Card> hand) {
         Platform.runLater(() -> {
             for (int i = 0; i < 5; i++) {
-                TitledPane card = CardPaneBuilder.buildPane(hand.get(i), this::playCardHandle, i);
+                TitledPane card = CardPaneBuilder.buildPane(hand.get(i), this::playCardHandle, i, cardPanes[i]);
                 if (!hand.get(i).canPlay(gameController.getPlayerCastle())) {
                     card.setDisable(true);
                 } else {
                     card.setDisable(false);
                 }
-                CardPaneBuilder.setCardToFill(card);
                 cardPanes[i].getChildren().setAll(card);
             }
         });
@@ -250,8 +249,7 @@ public class GameSceneController extends BaseSceneController {
      */
     public void displayLastPlayed(Card lastPlayedCard) {
         Platform.runLater(() -> {
-            TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0);
-            CardPaneBuilder.setCardToFill(lastPlayed);
+            TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0, cardLastPlayed);
             cardLastPlayed.getChildren().add(lastPlayed);
         });
     }
