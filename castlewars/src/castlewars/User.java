@@ -17,11 +17,11 @@ public class User {
     public User(Connection connection, String name) throws SQLException {
         this.name = name;
         this.connection = connection;
-        PreparedStatement ps = connection.prepareStatement("SELECT id FROM PROFILES WHERE name = ?");
+        PreparedStatement ps = connection.prepareStatement("SELECT profile_id FROM PROFILES WHERE name = ?");
         ps.setString(1, name);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            this.id = rs.getInt("id");
+            this.id = rs.getInt("profile_id");
         }
     }
    /**
@@ -45,7 +45,7 @@ public class User {
      * @throws SQLException 
      */
     public boolean deleteProfile() throws SQLException {
-        PreparedStatement ps = connection.prepareStatement("DELETE FROM PROFILES WHERE id = ? AND name = ?");
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM PROFILES WHERE profile_id = ? AND name = ?");
         ps.setInt(1, id);
         ps.setString(2, name);
         return ps.executeUpdate() != 0;

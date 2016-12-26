@@ -32,6 +32,7 @@ public class CardPaneBuilder {
         }
         box.getChildren().add(new Separator(Orientation.HORIZONTAL));
         Text t = new Text(card.getDescription());
+        t.setWrappingWidth(parent.getPrefWidth());
         box.getChildren().add(t);
         TitledPane cardPane = new TitledPane(card.getName(), box);
         cardPane.setCollapsible(false);
@@ -42,9 +43,6 @@ public class CardPaneBuilder {
         }
         cardPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         cardPane.setId(Integer.toString(id));
-        if (parent!= null) {
-        t.setWrappingWidth(parent.getPrefWidth());
-        }
         AnchorPane.setTopAnchor(cardPane, 0.0);
         AnchorPane.setBottomAnchor(cardPane, 0.0);
         AnchorPane.setLeftAnchor(cardPane, 0.0);

@@ -56,7 +56,6 @@ public class ProfileSelectSceneController extends BaseSceneController {
         try {
             profiles = new ToggleGroup();
             Connection conn = application.getConnection();
-            
             ResultSet rs = conn.prepareStatement("SELECT * FROM PROFILES").executeQuery();
             while (rs.next()) {
                 addProfileButton(rs.getString("name"));
