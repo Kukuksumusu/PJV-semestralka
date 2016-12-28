@@ -7,7 +7,7 @@ package castlewars.scenes;
 
 import castlewars.Castle;
 import castlewars.GameController;
-import castlewars.playable.Card;
+import castlewars.playable.Playable;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -147,7 +147,7 @@ public class GameSceneController extends BaseSceneController {
         thread.start();
     }
 
-    public void displayPlayerHand(List<Card> hand) {
+    public void displayPlayerHand(List<Playable> hand) {
         Platform.runLater(() -> {
             for (int i = 0; i < 5; i++) {
                 TitledPane card = CardPaneBuilder.buildPane(hand.get(i), this::playCardHandle, i, cardPanes[i]);
@@ -247,7 +247,7 @@ public class GameSceneController extends BaseSceneController {
      * Displays last played card in the appropriate slot
      * @param lastPlayedCard 
      */
-    public void displayLastPlayed(Card lastPlayedCard) {
+    public void displayLastPlayed(Playable lastPlayedCard) {
         Platform.runLater(() -> {
             TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0, cardLastPlayed);
             cardLastPlayed.getChildren().add(lastPlayed);

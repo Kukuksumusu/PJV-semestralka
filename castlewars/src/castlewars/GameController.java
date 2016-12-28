@@ -6,6 +6,7 @@ import castlewars.playable.Archer;
 import castlewars.playable.Card;
 import castlewars.playable.Playable;
 import castlewars.scenes.GameSceneController;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,7 +26,7 @@ public class GameController{
     private Castle playerCastle;
     private Castle opponentCastle;
     private Deck playerDeck;
-    private List<Card> playerHand;
+    private List<Playable> playerHand;
     private GameSceneController sceneController;
     private int difficulty = 0;
     private AI opponent;
@@ -49,7 +50,11 @@ public class GameController{
                 STARTING_RESOURCE_MAKERS, STARTING_RESOURCE_MAKERS, STARTING_RESOURCE_MAKERS, 
                 STARTING_RESOURCES, STARTING_RESOURCES, STARTING_RESOURCES);
         playerHand = new ArrayList<>(5);
-        playerDeck = loadDeck(application.getPlayer());
+        try {
+            playerDeck = application.getPlayer().loadDeck();
+        } catch (SQLException ex) {
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         for (int i = 0; i < 5; i++) {
             playerHand.add(playerDeck.draw());
         }
@@ -58,17 +63,8 @@ public class GameController{
         opponent = buildAI();
     }
 
-    private Deck loadDeck(User player) {
-        //TODO
-        //just for testing:
-        Deck deck = new Deck();
-        for (int i = 0; i < 10; i++) {
-            deck.addCard(new Archer());
-        }
-        return deck;
-    }
     
-    public List<Card> getPlayerHand() {
+    public List<Playable> getPlayerHand() {
         return playerHand;
     }
 
@@ -77,7 +73,7 @@ public class GameController{
      * @param positionInHand
      */
     public void playCard(int positionInHand) {
-        Card played = playerHand.remove(positionInHand);
+        Playable played = playerHand.remove(positionInHand);
         try {
             played.play(playerCastle, opponentCastle);
         } catch (Playable.GameEnd ex) {
@@ -92,7 +88,7 @@ public class GameController{
         opponentCastle.nextTurn();
         displayChanges();
         //play card
-        Card aiPlay = opponent.chooseCard(opponentCastle, playerCastle);
+        Playable aiPlay = opponent.chooseCard(opponentCastle, playerCastle);
         if (aiPlay != null) {
             try {
                 aiPlay.play(opponentCastle, playerCastle);

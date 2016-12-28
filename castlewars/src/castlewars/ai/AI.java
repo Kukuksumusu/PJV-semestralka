@@ -3,6 +3,7 @@ package castlewars.ai;
 import castlewars.Castle;
 import castlewars.Deck;
 import castlewars.playable.Card;
+import castlewars.playable.Playable;
 import java.util.List;
 
 /**
@@ -11,11 +12,11 @@ import java.util.List;
  */
 public abstract class AI {
     protected Deck deck;
-    protected List<Card> hand;
+    protected List<Playable> hand;
     
     public void draw() {
         hand.add(deck.draw());
     }
-    public abstract Card chooseCard(Castle aiCastle, Castle playerCastle);
-    public abstract Card chooseDiscard(Castle aiCastle, Castle playerCastle);
+    public abstract Playable chooseCard(Castle aiCastle, Castle playerCastle);
+    public abstract Playable chooseDiscard(Castle aiCastle, Castle playerCastle);
 }

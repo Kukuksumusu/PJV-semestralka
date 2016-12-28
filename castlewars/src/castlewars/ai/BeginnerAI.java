@@ -4,9 +4,8 @@ package castlewars.ai;
 import castlewars.Castle;
 import castlewars.Deck;
 import castlewars.playable.Archer;
-import castlewars.playable.Card;
+import castlewars.playable.Playable;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -30,10 +29,10 @@ public class BeginnerAI extends AI{
     }
 
     @Override
-    public Card chooseCard(Castle aiCastle, Castle playerCastle) {
-        Card result = null;
+    public Playable chooseCard(Castle aiCastle, Castle playerCastle) {
+        Playable result = null;
         Random r = new Random();
-        for (Card card : hand) {
+        for (Playable card : hand) {
             if (card.canPlay(aiCastle)) {
                 if (result == null || r.nextBoolean()) {
                     result = card;
@@ -44,10 +43,10 @@ public class BeginnerAI extends AI{
     }
 
     @Override
-    public Card chooseDiscard(Castle aiCastle, Castle playerCastle) {
-        Card result = null;
+    public Playable chooseDiscard(Castle aiCastle, Castle playerCastle) {
+        Playable result = null;
         Random r = new Random();
-        for (Card card : hand) {
+        for (Playable card : hand) {
             if (!card.canPlay(aiCastle)) {
                 if (result == null || r.nextBoolean()) {
                     result = card;

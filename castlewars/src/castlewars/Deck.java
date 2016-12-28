@@ -1,6 +1,6 @@
 package castlewars;
 
-import castlewars.playable.Card;
+import castlewars.playable.Playable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
  * @author Jakub
  */
 public class Deck {
-    private final List<Card> originalCards;
-    private List<Card> cards;
+    private final List<Playable> originalCards;
+    private List<Playable> cards;
 
     public Deck() {
         cards = new LinkedList<>();
@@ -23,18 +23,19 @@ public class Deck {
      * Note: the card is inserted on the bottom of the deck.
      * @param card 
      */
-    public void addCard(Card card) {
+    public void addCard(Playable card) {
         originalCards.add(card);
         cards.add(card);
+        System.out.println("actually adding " + card.getName());
     }
     
     public void shuffle() {
         Collections.shuffle(cards);
     }
     
-    public Card draw() {
+    public Playable draw() {
         if (cards.isEmpty()) {
-            cards = originalCards; //this duplicates cards in hand...TODO: fix
+            cards.addAll(originalCards); //this duplicates cards in hand...TODO: fix
             shuffle();
         }
         return cards.remove(0);

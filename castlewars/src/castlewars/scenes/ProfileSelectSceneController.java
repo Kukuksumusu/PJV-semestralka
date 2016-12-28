@@ -4,8 +4,10 @@ import castlewars.User;
 import castlewars.fxmlPaths;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -97,11 +99,10 @@ public class ProfileSelectSceneController extends BaseSceneController {
         Optional<String> result = dialog.showAndWait();
         result.ifPresent((String name) -> {
             try {
-                User user = new User(application.getConnection(), name);
-                user.writeToDb();
+                createNewProfile(name);
             } catch (SQLException ex) {
                 Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (User.AlreadyExistsException e) {
+            } catch (AlreadyExistsException e) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Can not create profile");
                 alert.setHeaderText("Profile '" + name + "' already exists");
@@ -149,12 +150,51 @@ public class ProfileSelectSceneController extends BaseSceneController {
             }
             System.out.println(((ToggleButton)profiles.getSelectedToggle()).getText());
             application.setPlayer(new User(application.getConnection(), ((ToggleButton)profiles.getSelectedToggle()).getText()));
-            //application.getGameController().setDifficulty(0);
-            application.replaceSceneContent(fxmlPaths.GAME);
+            application.replaceSceneContent(fxmlPaths.DECK_BUILDER);
         } catch (SQLException ex) {
             Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /**
+     * Creates new profile with default deck (every card possible x2)
+     * @param name
+     * @throws SQLException
+     * @throws castlewars.scenes.ProfileSelectSceneController.AlreadyExistsException 
+     */
+    private void createNewProfile(String name) throws SQLException, AlreadyExistsException {
+        Connection connection = application.getConnection();
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO PROFILES (name) VALUES (?)");
+        ps.setString(1, name);
+        try {
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new AlreadyExistsException();
+        }
+        //get the profile id
+        ps = connection.prepareStatement("SELECT profile_id FROM PROFILES WHERE name = ?");
+        ps.setString(1, name);
+        ResultSet rs = ps.executeQuery();
+        if (!rs.next()) {
+            throw new SQLException("Couldn't load id when creating profile");
+        }
+        int id = rs.getInt("profile_id");
+        //get all cards and insert the deck
+        ps = connection.prepareStatement("INSERT INTO DECKS (profile_id, card_id, count) VALUES (?,?,2)");
+        ps.setInt(1, id);
+        Statement s = connection.createStatement();
+        rs = s.executeQuery("SELECT card_id FROM CARDS");
+        while (rs.next()){
+            ps.setInt(2, rs.getInt("card_id"));
+            ps.execute();
+        }
+    }
+
+    private static class AlreadyExistsException extends Exception {
+
+        public AlreadyExistsException() {
         }
     }
 }

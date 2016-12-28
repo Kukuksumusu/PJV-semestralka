@@ -41,8 +41,8 @@ public class Launcher extends Application {
         connection = db.getConnection();
         stage = primaryStage;
         gameController = new GameController(this);
-        //replaceSceneContent(fxmlPaths.PROFILE);
-        replaceSceneContent(fxmlPaths.DECK_BUILDER);
+        replaceSceneContent(fxmlPaths.PROFILE);
+        //replaceSceneContent(fxmlPaths.DECK_BUILDER);
         stage.show();
     }
     
