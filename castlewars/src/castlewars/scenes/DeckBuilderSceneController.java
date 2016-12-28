@@ -23,6 +23,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import castlewars.playable.*;
 import java.sql.PreparedStatement;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 
 /**
  * FXML Controller class
@@ -33,9 +36,12 @@ public class DeckBuilderSceneController extends BaseSceneController {
 
     @FXML
     private FlowPane flowPane;
-
+    @FXML
+    private Label numOfCardsLabel;
+    
     private List<Spinner> spinners;
     private Connection conn;
+    private int numOfCards;
     /**
      * Initializes the controller class.
      * @param url
@@ -60,8 +66,13 @@ public class DeckBuilderSceneController extends BaseSceneController {
                 cardPane.setPrefSize(100, 200);
                 TitledPane card = CardPaneBuilder.buildPane((Playable)Class.forName("castlewars.playable." + rs.getString("classname")).newInstance(), null, 0, cardPane);
                 cardPane.getChildren().add(card);
+                numOfCards += rs.getInt("count");
                 Spinner<Integer> spinner = new Spinner<>(0, 5, rs.getInt("count"));
                 spinner.setId(rs.getString("card_id"));
+                spinner.valueProperty().addListener((observable, oldValue, newValue) -> {
+                    numOfCards += newValue - oldValue;
+                    updateNumOfCardsLabel();
+                });
                 spinner.setEditable(false);//true would require manual control on change
                 spinners.add(spinner);
                 VBox menuItem = new VBox(cardPane, spinner);
@@ -70,6 +81,7 @@ public class DeckBuilderSceneController extends BaseSceneController {
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        updateNumOfCardsLabel();
     }
     /**
      * Hander for submit
@@ -77,6 +89,13 @@ public class DeckBuilderSceneController extends BaseSceneController {
      */
     @FXML
     private void submitHandle(ActionEvent event) {
+        if (numOfCards < 20) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Not enough cards");
+            alert.setHeaderText("Your deck must have at least 20 cards");
+            alert.showAndWait();
+            return;
+        }
         try {
             PreparedStatement ps = conn.prepareStatement("UPDATE DECKS SET count = ? WHERE profile_id = ? AND card_id = ?");
             ps.setInt(2, application.getPlayer().getId());
@@ -96,6 +115,18 @@ public class DeckBuilderSceneController extends BaseSceneController {
         } catch (SQLException ex) {
             Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void updateNumOfCardsLabel() {
+        if (numOfCards < 20) {
+            numOfCardsLabel.getStyleClass().setAll("invalid");
+            numOfCardsLabel.setTooltip(new Tooltip("Your deck must have at least 20 cards"));
+        } else {
+            numOfCardsLabel.getStyleClass().setAll("valid");
+            numOfCardsLabel.setTooltip(new Tooltip("Your deck has at least 20 cards"));
+        }
+        numOfCardsLabel.setText(numOfCards + "");
+        
     }
     
 }

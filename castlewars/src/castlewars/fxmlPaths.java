@@ -7,7 +7,7 @@ package castlewars;
 public enum fxmlPaths {
     PROFILE("profileSelectScene.fxml", null),
     GAME("gameScene.fxml", "gameScene.css"),
-    DECK_BUILDER("deckBuilderScene.fxml", null);
+    DECK_BUILDER("deckBuilderScene.fxml", "deckBuilderScene.css");
     
     private final String name;
     private final String css;
