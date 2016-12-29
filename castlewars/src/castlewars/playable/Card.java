@@ -49,6 +49,14 @@ public abstract class Card implements Playable{
         castle.changeCrystals(-(getCost().getCrystals()));
     }
     
+    @Override
+    public void play(Castle playerCastle, Castle opponentCastle) throws GameEnd, CanNotPlayException {
+        deductCost(playerCastle);
+        makeEffect(playerCastle, opponentCastle);
+    }
+
+    protected abstract void makeEffect(Castle playerCastle, Castle opponentCastle) throws GameEnd;
+    
     /**
      * Class representing card cost
      */

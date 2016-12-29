@@ -16,9 +16,9 @@ import java.util.logging.Logger;
  */
 public class GameController{
     private final int DELAY = 1000;
-    private final int STARTING_CASTLE_HP = 50;
-    private final int STARTING_WALL_HP = 20;
-    private final int STARTING_RESOURCE_MAKERS = 3;
+    private final int STARTING_CASTLE_HP = 30;
+    private final int STARTING_WALL_HP = 10;
+    private final int STARTING_RESOURCE_MAKERS = 2;
     private final int STARTING_RESOURCES = 5;
     private final Launcher application;
     private Castle playerCastle;
@@ -50,6 +50,7 @@ public class GameController{
         playerHand = new ArrayList<>(5);
         try {
             playerDeck = application.getPlayer().loadDeck();
+            playerDeck.shuffle();
         } catch (SQLException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }

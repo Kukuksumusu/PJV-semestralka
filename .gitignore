@@ -2,3 +2,4 @@
 /castlewars/build/
 /castlewars/database/*
 /castlewars/derby.log
+/castlewars/dist/

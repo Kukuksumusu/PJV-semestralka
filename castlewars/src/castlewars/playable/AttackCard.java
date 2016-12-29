@@ -15,8 +15,7 @@ public abstract class AttackCard extends Card{
     }
     
     @Override
-    public void play(Castle playerCastle, Castle opponentCastle) throws GameEnd, CanNotPlayException {
-        deductCost(playerCastle);
+    public void makeEffect(Castle playerCastle, Castle opponentCastle) throws GameEnd {
         try {
             opponentCastle.takeDamage(dmg);
         } catch (Castle.GameLost ex) {

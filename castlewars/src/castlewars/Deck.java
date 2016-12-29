@@ -26,7 +26,6 @@ public class Deck {
     public void addCard(Playable card) {
         originalCards.add(card);
         cards.add(card);
-        System.out.println("actually adding " + card.getName());
     }
     
     public void shuffle() {

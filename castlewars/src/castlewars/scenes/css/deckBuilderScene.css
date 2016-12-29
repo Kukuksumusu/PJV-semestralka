@@ -2,3 +2,9 @@
     -fx-text-fill: red;
     -fx-font-weight: bold;
 }
+
+.scroll-pane {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: transparent;
+}
