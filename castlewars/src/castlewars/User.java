@@ -54,7 +54,7 @@ public class User {
         while (rs.next()) {
             for (int i = 0; i < rs.getInt("count"); i++) {
                 try {
-                    deck.addCard((Playable)Class.forName("castlewars.playable." + rs.getString("classname")).newInstance());
+                    deck.addCard((Playable)Class.forName(rs.getString("classname")).newInstance());
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
                 }

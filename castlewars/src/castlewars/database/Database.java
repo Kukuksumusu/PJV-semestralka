@@ -1,5 +1,6 @@
 package castlewars.database;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -16,9 +17,9 @@ public class Database {
     private final String URL = ".";
     private final Connection connection;
     /**
-     * array of all cards
+     * array of all packages with cards
      */
-    private final String[] cardClassNames = {"Archer"};
+    private final String[] cardPackageNames = {"weapons"};
 
     /**
      * 
@@ -80,9 +81,17 @@ public class Database {
 
     private void insertCards() throws SQLException {
         PreparedStatement ps = connection.prepareStatement("INSERT INTO CARDS (classname) VALUES (?)");
-        for (String cardClassName : cardClassNames) {
-            ps.setString(1, cardClassName);
-            ps.execute();
+        String filePrefix = "src" + File.separator + "castlewars" + File.separator + "playable" + File.separator;
+        String dbPrefix = "castlewars.playable.";
+        for (String cardPackageName : cardPackageNames) {
+            File[] files = new File( filePrefix + cardPackageName).listFiles();
+            for (File file : files) {
+                if (file.isFile()) {
+                    ps.setString(1, dbPrefix + cardPackageName + "." + file.getName().substring(0, file.getName().lastIndexOf(".")));
+                    ps.execute();
+                    //System.out.println(dbPrefix + "weapons." + file.getName().substring(0, file.getName().lastIndexOf(".")));
+                }
+            }
         }
     }
 }

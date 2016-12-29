@@ -5,6 +5,7 @@
  */
 package castlewars.scenes;
 
+import castlewars.fxmlPaths;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -64,7 +65,7 @@ public class DeckBuilderSceneController extends BaseSceneController {
                 //System.out.println(rs.getString("classname"));
                 AnchorPane cardPane = new AnchorPane();
                 cardPane.setPrefSize(100, 200);
-                TitledPane card = CardPaneBuilder.buildPane((Playable)Class.forName("castlewars.playable." + rs.getString("classname")).newInstance(), null, 0, cardPane);
+                TitledPane card = CardPaneBuilder.buildPane((Playable)Class.forName(rs.getString("classname")).newInstance(), null, 0, cardPane);
                 cardPane.getChildren().add(card);
                 numOfCards += rs.getInt("count");
                 Spinner<Integer> spinner = new Spinner<>(0, 5, rs.getInt("count"));
@@ -113,6 +114,11 @@ public class DeckBuilderSceneController extends BaseSceneController {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            application.replaceSceneContent(fxmlPaths.GAME);
+        } catch (Exception ex) {
             Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

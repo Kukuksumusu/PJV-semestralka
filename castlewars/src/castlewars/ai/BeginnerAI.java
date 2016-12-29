@@ -3,7 +3,7 @@ package castlewars.ai;
 
 import castlewars.Castle;
 import castlewars.Deck;
-import castlewars.playable.Archer;
+import castlewars.playable.weapons.Archer;
 import castlewars.playable.Playable;
 import java.util.LinkedList;
 import java.util.Random;

@@ -2,8 +2,6 @@ package castlewars;
 
 import castlewars.ai.AI;
 import castlewars.ai.BeginnerAI;
-import castlewars.playable.Archer;
-import castlewars.playable.Card;
 import castlewars.playable.Playable;
 import castlewars.scenes.GameSceneController;
 import java.sql.SQLException;
@@ -18,8 +16,8 @@ import java.util.logging.Logger;
  */
 public class GameController{
     private final int DELAY = 1000;
-    private final int STARTING_CASTLE_HP = 30;
-    private final int STARTING_WALL_HP = 10;
+    private final int STARTING_CASTLE_HP = 50;
+    private final int STARTING_WALL_HP = 20;
     private final int STARTING_RESOURCE_MAKERS = 3;
     private final int STARTING_RESOURCES = 5;
     private final Launcher application;
