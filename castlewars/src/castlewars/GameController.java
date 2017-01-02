@@ -92,6 +92,7 @@ public class GameController{
         sceneController.displayLastPlayed(played, discarding);
         displayChanges();
         //opponents turn start
+        sceneController.displayCardBacks();
         opponentCastle.nextTurn();
         displayChanges();
         //play card
@@ -99,6 +100,8 @@ public class GameController{
         if (aiPlay != null) {
             try {
                 aiPlay.play(opponentCastle, playerCastle);
+                opponent.removeCard(aiPlay);
+                sceneController.hideRandomCard();
             } catch (Playable.GameEnd ex) {
                 sceneController.displayLastPlayed(aiPlay, false);
                 displayChanges();

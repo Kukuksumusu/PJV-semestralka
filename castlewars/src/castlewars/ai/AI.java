@@ -32,6 +32,10 @@ public abstract class AI {
     public void draw() {
         hand.add(deck.draw());
     }
+        
+    public void removeCard(Playable card) {
+        hand.remove(card);
+    }
     
     public abstract Playable chooseCard(Castle aiCastle, Castle playerCastle);
     /**
@@ -41,6 +45,7 @@ public abstract class AI {
      * @return discarded card
      */
     public abstract Playable chooseAndDiscard(Castle aiCastle, Castle playerCastle);
+    
     
     static protected Deck getDefaultDeck(Connection connection) {
         Deck deck = new Deck();

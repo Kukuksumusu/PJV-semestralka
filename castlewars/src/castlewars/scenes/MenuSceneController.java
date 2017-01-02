@@ -1,17 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package castlewars.scenes;
 
 import castlewars.fxmlPaths;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 
 /**
@@ -39,7 +37,24 @@ public class MenuSceneController extends BaseSceneController {
     @FXML
     private void startGameHandle(ActionEvent event) {
         try {
-            application.replaceSceneContent(fxmlPaths.GAME);
+
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("Beginner", "Beginner", "Easy");
+            dialog.setTitle("Difficulty");
+            dialog.setHeaderText(null);
+            dialog.setContentText("Choose difficulty:");
+
+            // Traditional way to get the response value.
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()){
+                int difficulty = 0;
+                switch (dialog.getSelectedItem()) {
+                    case "Beginner": difficulty = 0; break;
+                    case "Easy": difficulty = 1; break;
+                }
+                application.getGameController().setDifficulty(difficulty);
+                application.replaceSceneContent(fxmlPaths.GAME);
+            }
+            
         } catch (Exception ex) {
             Logger.getLogger(MenuSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,6 +5,8 @@ import castlewars.database.Database;
 import java.io.InputStream;
 import java.sql.Connection;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
@@ -27,10 +29,14 @@ public class Launcher extends Application {
     
     private User player;
     
+    private int width = 800;
+    
+    private int height = 600;
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {   
+    public static void main(String[] args) { 
         launch(args);
     }
 
@@ -66,7 +72,13 @@ public class Launcher extends Application {
         sceneController.setApp(this);
         sceneController.postInit();
         
-        Scene scene = new Scene(page, 800, 600);
+        Scene scene = new Scene(page, width, height);
+        scene.widthProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
+            width = newSceneWidth.intValue();
+        });
+        scene.heightProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) -> {
+            height = newSceneHeight.intValue();
+        });
         if (fxml.getCSS() != null) {
             scene.getStylesheets().add(fxml.getCSS());
         }

@@ -5,8 +5,10 @@ import castlewars.Castle;
 import castlewars.GameController;
 import castlewars.fxmlPaths;
 import castlewars.playable.Playable;
+import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -330,6 +333,24 @@ public class GameSceneController extends BaseSceneController {
             } catch (Exception ex) {
                 Logger.getLogger(GameSceneController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        });
+    }
+
+    public void displayCardBacks() {
+        Platform.runLater(() -> {
+            for (AnchorPane cardPane : cardPanes) {
+                ImageView iv = new ImageView("castlewars" + File.separator + "pictures" + File.separator + "card-back.png");            
+                iv.fitHeightProperty().bind(cardPane.heightProperty());
+                iv.fitWidthProperty().bind(cardPane.widthProperty());
+                cardPane.getChildren().setAll(iv);
+                }
+        });
+    }
+    
+    public void hideRandomCard() {
+        Platform.runLater(() -> {
+            Random r = new Random();
+            cardPanes[r.nextInt(5)].getChildren().get(0).setVisible(false);
         });
     }
 }

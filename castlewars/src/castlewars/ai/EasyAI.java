@@ -24,10 +24,7 @@ public class EasyAI extends AI {
         int max = Integer.MIN_VALUE;
         for (Playable card : hand) {
             if (card.canPlay(aiCastle)) {
-                if (result == null) {
-                    result = card;
-                    continue;
-                }
+                System.out.println("Card: " + card.getName());
                 Castle myCastle = aiCastle.deepCopy();
                 Castle opponentCastle = playerCastle.deepCopy();
                 try {
@@ -42,7 +39,7 @@ public class EasyAI extends AI {
                     Logger.getLogger(EasyAI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 int newValue = evaluateCastles(myCastle, opponentCastle);
-                if (max < newValue) {
+                if (max < newValue || result == null) {
                     max = newValue;
                     result = card;
                 }
@@ -70,6 +67,7 @@ public class EasyAI extends AI {
     private int evaluateCastles(Castle myCastle, Castle opponentCastle) {
         int result = evaluateCastle(myCastle);
         result -= evaluateCastle(opponentCastle);
+        System.out.println(result);
         return result;
     }
 
