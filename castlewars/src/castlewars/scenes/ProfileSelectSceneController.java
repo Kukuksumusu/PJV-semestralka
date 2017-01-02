@@ -85,6 +85,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
         delete.setFont(newProfile.getFont());
         delete.setOnAction(this::handleDelete);
         delete.setId(name);
+        delete.getStyleClass().add("delete");
         pane.getChildren().add(delete);
         vBoxProfiles.getChildren().add(pane);
     }
@@ -92,7 +93,6 @@ public class ProfileSelectSceneController extends BaseSceneController {
      * Handles creating new profile
      */
     public void handleCreate() {
-        System.out.println("creating new");
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Name input");
         dialog.setHeaderText(null);
@@ -119,7 +119,6 @@ public class ProfileSelectSceneController extends BaseSceneController {
      */
     private void handleDelete(ActionEvent event) {
         String deleteID = ((Button)event.getSource()).getId();
-        System.out.println(deleteID);
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Are you sure?");
         alert.setHeaderText("Do you really want to delete profile " + deleteID + "?");
@@ -149,7 +148,6 @@ public class ProfileSelectSceneController extends BaseSceneController {
                 alert.showAndWait();
                 return;
             }
-            System.out.println(((ToggleButton)profiles.getSelectedToggle()).getText());
             application.setPlayer(new User(application.getConnection(), ((ToggleButton)profiles.getSelectedToggle()).getText()));
             application.replaceSceneContent(fxmlPaths.MENU);
         } catch (SQLException ex) {
@@ -171,7 +169,6 @@ public class ProfileSelectSceneController extends BaseSceneController {
         try {
             ps.execute();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new AlreadyExistsException();
         }
         //get the profile id

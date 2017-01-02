@@ -62,7 +62,7 @@ public class DeckBuilderSceneController extends BaseSceneController {
                 
                 @Override
                 protected double computeValue() {
-                    return application.getStage().widthProperty().intValue() - 55;
+                    return application.getStage().widthProperty().intValue() - 50;
                 }
             };
             flowPane.prefWrapLengthProperty().bind(db);

@@ -79,6 +79,7 @@ public class Launcher extends Application {
         scene.heightProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) -> {
             height = newSceneHeight.intValue();
         });
+        scene.getStylesheets().add(fxml.getDefaultCSS());
         if (fxml.getCSS() != null) {
             scene.getStylesheets().add(fxml.getCSS());
         }

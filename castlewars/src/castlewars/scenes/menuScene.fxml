@@ -13,11 +13,11 @@
         <URL value="@/castlewars/scenes/css/menuscene.css" />
     </stylesheets>
    <children>
-      <VBox alignment="CENTER" layoutX="250.0" layoutY="77.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="250.0" layoutY="77.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startGameHandle" prefHeight="40.0" prefWidth="100.0" text="Start game" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deckBuilderHandle" prefHeight="40.0" prefWidth="100.0" text="Change deck" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#changeProfileHandle" prefHeight="40.0" prefWidth="100.0" text="Change profile" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startGameHandle" prefHeight="60.0" prefWidth="150.0" text="Start game" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deckBuilderHandle" prefHeight="60.0" prefWidth="150.0" text="Modify deck" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#changeProfileHandle" prefHeight="60.0" prefWidth="150.0" text="Change profile" />
          </children>
       </VBox>
       <Label layoutX="530.0" layoutY="382.0" text="Logged in as:" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="50.0" />

@@ -19,7 +19,7 @@ public class Database {
     /**
      * array of all packages with cards
      */
-    private final String[] cardPackageNames = {"weapons", "bricks", "crystals"};
+    private final String[] cardPackageNames = {"weapons", "bricks", "crystals", "mixed"};
 
     /**
      * 

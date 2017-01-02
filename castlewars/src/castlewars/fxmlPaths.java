@@ -14,6 +14,7 @@ public enum fxmlPaths {
     private final String css;
     private final String PREFIX = "scenes/";
     private final String CSSPREFIX = "castlewars/scenes/css/";
+    private final String DEFAULT_CSS = "default.css";
     
     private fxmlPaths(String name, String css) {
         this.name = name;
@@ -29,5 +30,9 @@ public enum fxmlPaths {
             return CSSPREFIX + css;
         }
         return null;
+    }
+    
+    public String getDefaultCSS() {
+        return CSSPREFIX + DEFAULT_CSS;
     }
 }

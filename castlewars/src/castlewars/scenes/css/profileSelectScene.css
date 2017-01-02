@@ -1,10 +1,36 @@
-.button:default {
-    -fx-color:black;
-    -fx-background-color:#34c669;
-    -fx-background-radius: 10px;
+
+.toggle-button {
+    -fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+.toggle-button:selected {
+    -fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% 50%, radius 200%, #e6e6e6 10%, black 90%);
 }
 
 .delete {
     -fx-background-color: #ff3333;
 }
 
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: #e5e5e5;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
