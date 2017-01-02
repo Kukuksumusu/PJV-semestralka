@@ -20,6 +20,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import castlewars.playable.*;
 import java.sql.PreparedStatement;
+import javafx.beans.binding.DoubleBinding;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -53,7 +54,18 @@ public class DeckBuilderSceneController extends BaseSceneController {
     @Override
     public void postInit() {
         try {
-            flowPane.prefWrapLengthProperty().bind(application.getStage().widthProperty());
+            DoubleBinding db = new DoubleBinding() {
+                
+                {
+                    super.bind(application.getStage().widthProperty(), flowPane.prefWrapLengthProperty());
+                }
+                
+                @Override
+                protected double computeValue() {
+                    return application.getStage().widthProperty().intValue() - 55;
+                }
+            };
+            flowPane.prefWrapLengthProperty().bind(db);
             conn = application.getConnection();
             PreparedStatement ps = conn.prepareStatement("SELECT card_id, classname, count FROM CARDS LEFT JOIN DECKS USING (card_id) WHERE profile_id is NULL or profile_id = ?");
             ps.setInt(1, application.getPlayer().getId());

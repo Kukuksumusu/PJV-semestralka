@@ -4,3 +4,7 @@
     -fx-background-radius: 10px;
 }
 
+.delete {
+    -fx-background-color: #ff3333;
+}
+
