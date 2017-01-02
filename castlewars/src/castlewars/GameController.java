@@ -60,6 +60,7 @@ public class GameController{
         sceneController.displayPlayerHand(playerHand);
         sceneController.displayCastles(playerCastle, opponentCastle, 0);
         opponent = buildAI();
+        sceneController.startPlayerTurn();
     }
 
     
@@ -70,18 +71,23 @@ public class GameController{
     /**
      * plays card on the specified position in players hand
      * @param positionInHand
+     * @param discarding true if the card should not be played, but only discarded
      */
-    public void playCard(int positionInHand) {
+    public void playCard(int positionInHand, boolean discarding) {
+        sceneController.endPlayerTurn();
         Playable played = playerHand.remove(positionInHand);
-        try {
-            played.play(playerCastle, opponentCastle);
-        } catch (Playable.GameEnd ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Playable.CanNotPlayException ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+        if (!discarding) {
+            try {
+                played.play(playerCastle, opponentCastle);
+            } catch (Playable.GameEnd ex) {
+                sceneController.endOfGame(ex.isWinner());
+                return;
+            } catch (Playable.CanNotPlayException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         playerHand.add(positionInHand, playerDeck.draw());
-        sceneController.displayLastPlayed(played);
+        sceneController.displayLastPlayed(played, discarding);
         displayChanges();
         //opponents turn start
         opponentCastle.nextTurn();
@@ -92,19 +98,23 @@ public class GameController{
             try {
                 aiPlay.play(opponentCastle, playerCastle);
             } catch (Playable.GameEnd ex) {
-                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                sceneController.displayLastPlayed(aiPlay, false);
+                sceneController.endOfGame(!ex.isWinner());
+                return;
             } catch (Playable.CanNotPlayException ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            sceneController.displayLastPlayed(aiPlay, false);
         } else {
-            
+            sceneController.displayLastPlayed(opponent.chooseDiscard(opponentCastle, playerCastle), true);
         }
-        sceneController.displayLastPlayed(aiPlay);
+        opponent.draw();
         displayChanges();
         //player turn start
         playerCastle.nextTurn();
         displayChanges();
-        sceneController.displayPlayerHand(playerHand); 
+        sceneController.displayPlayerHand(playerHand);
+        sceneController.startPlayerTurn();
     }
     
     private void displayChanges() {

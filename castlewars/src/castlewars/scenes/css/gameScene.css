@@ -4,3 +4,10 @@
 .decrease {
     -fx-background-color: red;
 }
+.discarding {
+    -fx-text-fill: red;
+}
+
+.info {
+    
+}

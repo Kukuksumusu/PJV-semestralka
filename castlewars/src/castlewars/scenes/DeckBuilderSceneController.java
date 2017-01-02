@@ -101,7 +101,6 @@ public class DeckBuilderSceneController extends BaseSceneController {
             PreparedStatement ps = conn.prepareStatement("UPDATE DECKS SET count = ? WHERE profile_id = ? AND card_id = ?");
             ps.setInt(2, application.getPlayer().getId());
             for (Spinner spinner : spinners) {
-                System.out.println(spinner.getId() + ": " + spinner.getValue());
                 ps.setInt(1, (int) spinner.getValue());
                 ps.setInt(3, Integer.parseInt(spinner.getId()));
                 int res = ps.executeUpdate();

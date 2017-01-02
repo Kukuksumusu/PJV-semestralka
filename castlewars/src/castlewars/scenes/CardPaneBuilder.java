@@ -28,7 +28,7 @@ public class CardPaneBuilder {
             box.getChildren().add(new Label("Weapons: " + cost.getWeapons()));
         }
         if (cost.getCrystals() > 0) {
-            box.getChildren().add(new Label("Bricks: " + cost.getCrystals()));
+            box.getChildren().add(new Label("Crystals: " + cost.getCrystals()));
         }
         box.getChildren().add(new Separator(Orientation.HORIZONTAL));
         Text t = new Text(card.getDescription());

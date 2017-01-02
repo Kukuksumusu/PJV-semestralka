@@ -5,6 +5,7 @@ import castlewars.Castle;
 import castlewars.Deck;
 import castlewars.playable.weapons.Archer;
 import castlewars.playable.Playable;
+import castlewars.playable.weapons.Catapult;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -19,7 +20,7 @@ public class BeginnerAI extends AI{
         this.deck = new Deck();
         this.hand = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
-            deck.addCard(new Archer());
+            deck.addCard(new Catapult());
         }
         deck.shuffle();
         
@@ -53,6 +54,7 @@ public class BeginnerAI extends AI{
                 }
             }
         }
+        hand.remove(result);
         return result;
     }
 }

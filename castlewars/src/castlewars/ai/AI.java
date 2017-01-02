@@ -18,5 +18,11 @@ public abstract class AI {
         hand.add(deck.draw());
     }
     public abstract Playable chooseCard(Castle aiCastle, Castle playerCastle);
+    /**
+     * Chooses and discards a card
+     * @param aiCastle
+     * @param playerCastle
+     * @return discarded card
+     */
     public abstract Playable chooseDiscard(Castle aiCastle, Castle playerCastle);
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package castlewars.scenes;
 
 import castlewars.Castle;
@@ -16,10 +12,15 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -105,12 +106,14 @@ public class GameSceneController extends BaseSceneController {
     private Label playerCastleHpChange;
     @FXML
     private Label playerWallHpChange;
-    
+    @FXML
+    private Label discardInfoLabel;
     
     private GameController gameController;
     private AnchorPane[] cardPanes; 
-
-
+    private boolean discarding = false;
+    private boolean isPlayerTurn = true;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -132,13 +135,11 @@ public class GameSceneController extends BaseSceneController {
     @FXML
     private void playCardHandle(Event event) {
         TitledPane source = (TitledPane)event.getSource();
-        /*Card lastPlayedCard = gameController.playCard(Integer.parseInt(source.getId()));
-        */
         source.setVisible(false);
         disableCards();
         Task <Void> task = new Task<Void>() {
             @Override public Void call() throws InterruptedException {
-                gameController.playCard(Integer.parseInt(source.getId()));
+                gameController.playCard(Integer.parseInt(source.getId()), discarding);
                 return null;
             }
         };
@@ -147,14 +148,40 @@ public class GameSceneController extends BaseSceneController {
         thread.start();
     }
 
+    @FXML
+    private void keyPressHandle(KeyEvent event) {
+        if (event.getCode() == KeyCode.CONTROL) {            
+            discarding = true;
+            discardInfoLabel.setText("DISCARDING");
+            discardInfoLabel.getStyleClass().setAll("discarding");
+            if (isPlayerTurn) {
+                for (AnchorPane cardPane : cardPanes) {
+                    cardPane.setDisable(false);
+                }
+            }
+        }
+    }
+    
+    @FXML
+    private void keyReleaseHandle(KeyEvent event) {
+        if (event.getCode() == KeyCode.CONTROL) {
+            discarding = false;
+            discardInfoLabel.setText("Hold CTRL to discard");
+            discardInfoLabel.getStyleClass().setAll("info");
+            if (isPlayerTurn) {
+                displayPlayerHand(gameController.getPlayerHand());
+            }
+        }
+    }
+    
     public void displayPlayerHand(List<Playable> hand) {
         Platform.runLater(() -> {
             for (int i = 0; i < 5; i++) {
                 TitledPane card = CardPaneBuilder.buildPane(hand.get(i), this::playCardHandle, i, cardPanes[i]);
                 if (!hand.get(i).canPlay(gameController.getPlayerCastle())) {
-                    card.setDisable(true);
+                    cardPanes[i].setDisable(true);
                 } else {
-                    card.setDisable(false);
+                    cardPanes[i].setDisable(false);
                 }
                 cardPanes[i].getChildren().setAll(card);
             }
@@ -218,13 +245,11 @@ public class GameSceneController extends BaseSceneController {
         if (newValue > origValue) {
             changeLabel.setText("+" + Integer.toString(newValue - origValue));
             changeLabel.getStyleClass().setAll("increase");
-            //changeLabel.getStyleClass().remove("decrease");
             changeLabel.applyCss();
             changeLabel.setVisible(true);
         } else if (newValue < origValue) {
             changeLabel.setText(Integer.toString(newValue - origValue));
             changeLabel.getStyleClass().setAll("decrease");
-            //changeLabel.getStyleClass().remove("increase");
             changeLabel.applyCss();
             changeLabel.setVisible(true);
         } else {
@@ -246,11 +271,13 @@ public class GameSceneController extends BaseSceneController {
     /**
      * Displays last played card in the appropriate slot
      * @param lastPlayedCard 
+     * @param isDiscarded true if card was discarded
      */
-    public void displayLastPlayed(Playable lastPlayedCard) {
+    public void displayLastPlayed(Playable lastPlayedCard, boolean isDiscarded) {
         Platform.runLater(() -> {
             TitledPane lastPlayed = CardPaneBuilder.buildPane(lastPlayedCard, null, 0, cardLastPlayed);
-            cardLastPlayed.getChildren().add(lastPlayed);
+            cardLastPlayed.getChildren().setAll(lastPlayed);
+            cardLastPlayed.setDisable(isDiscarded);
         });
     }
     /**
@@ -262,6 +289,39 @@ public class GameSceneController extends BaseSceneController {
                 for (Node card : cardPane.getChildren()) {
                     card.setDisable(true);
                 }
+            }
+        });
+    }
+    
+    public void endPlayerTurn() {
+        Platform.runLater(() -> {
+            isPlayerTurn = false;
+            discardInfoLabel.setVisible(false);
+        });
+    }
+    
+    public void startPlayerTurn() {
+        Platform.runLater(() -> {
+            isPlayerTurn = true;
+            discardInfoLabel.setVisible(true);
+            keyReleaseHandle(new KeyEvent(null, null, KeyEvent.KEY_RELEASED, "", "", KeyCode.CONTROL, false, false, false, false));
+        });
+    }
+
+    public void endOfGame(boolean won) {
+        Platform.runLater(() -> {
+            if (won) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle(null);
+                alert.setHeaderText("VICTORY");
+                alert.setContentText("Congratulation, you won!");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle(null);
+                alert.setHeaderText("DEFEAT");
+                alert.setContentText("Sorry, you lost");
+                alert.showAndWait();
             }
         });
     }

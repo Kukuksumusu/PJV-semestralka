@@ -179,8 +179,8 @@ public class Castle {
             throw new IllegalArgumentException("Damage can't be negative (that's not how healing works here)");
         }
         if (damage > wallHp) {
-            changeWallHp(-wallHp);
             changeHp(-(damage - wallHp));
+            changeWallHp(-wallHp);
         } else {
             changeWallHp(-damage);
         }
