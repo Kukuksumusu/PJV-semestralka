@@ -2,6 +2,7 @@ package castlewars;
 
 import castlewars.ai.AI;
 import castlewars.ai.BeginnerAI;
+import castlewars.ai.EasyAI;
 import castlewars.playable.Playable;
 import castlewars.scenes.GameSceneController;
 import java.sql.SQLException;
@@ -80,6 +81,7 @@ public class GameController{
             try {
                 played.play(playerCastle, opponentCastle);
             } catch (Playable.GameEnd ex) {
+                displayChanges();
                 sceneController.endOfGame(ex.isWinner());
                 return;
             } catch (Playable.CanNotPlayException ex) {
@@ -99,6 +101,7 @@ public class GameController{
                 aiPlay.play(opponentCastle, playerCastle);
             } catch (Playable.GameEnd ex) {
                 sceneController.displayLastPlayed(aiPlay, false);
+                displayChanges();
                 sceneController.endOfGame(!ex.isWinner());
                 return;
             } catch (Playable.CanNotPlayException ex) {
@@ -106,10 +109,10 @@ public class GameController{
             }
             sceneController.displayLastPlayed(aiPlay, false);
         } else {
-            sceneController.displayLastPlayed(opponent.chooseDiscard(opponentCastle, playerCastle), true);
+            sceneController.displayLastPlayed(opponent.chooseAndDiscard(opponentCastle, playerCastle), true);
         }
-        opponent.draw();
         displayChanges();
+        opponent.draw();
         //player turn start
         playerCastle.nextTurn();
         displayChanges();
@@ -147,8 +150,9 @@ public class GameController{
 
     private AI buildAI() {
         switch (difficulty) {
-            case 0: return new BeginnerAI();
-            default: return new BeginnerAI();
+            case 0: return new BeginnerAI(application.getConnection());
+            case 1: return new EasyAI(application.getConnection());
+            default: return new BeginnerAI(application.getConnection());
         }
     }
 }

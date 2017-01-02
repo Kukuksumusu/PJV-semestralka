@@ -19,6 +19,9 @@ public abstract class CastleBuildCard extends Card{
         try {
             playerCastle.changeHp(points);
         } catch (Castle.GameLost ex) {
+            //should not happen
+            throw new GameEnd(false);
+        } catch (Castle.GameWon ex) {
             throw new GameEnd(true);
         }
     }

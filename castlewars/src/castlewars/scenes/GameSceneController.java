@@ -3,6 +3,7 @@ package castlewars.scenes;
 
 import castlewars.Castle;
 import castlewars.GameController;
+import castlewars.fxmlPaths;
 import castlewars.playable.Playable;
 import java.net.URL;
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -260,13 +260,15 @@ public class GameSceneController extends BaseSceneController {
      * Hides all changeLabels
      */
     private void hideAllChanges() {
-        Label[] changeLabels = {playerBuildersChange, playerBricksChange, playerWeaponsmithsChange, playerWeaponsChange,
-            playerMagesChange, playerCrystalsChange, playerCastleHpChange, playerWallHpChange,
-            opponentBuildersChange, opponentBricksChange, opponentWeaponsmithsChange, opponentWeaponsChange,
-            opponentMagesChange, opponentCrystalsChange, opponentCastleHpChange, opponentWallHpChange};
-        for (Label changeLabel : changeLabels) {
-            changeLabel.setVisible(false);
-        }
+        Platform.runLater(() -> {
+            Label[] changeLabels = {playerBuildersChange, playerBricksChange, playerWeaponsmithsChange, playerWeaponsChange,
+                playerMagesChange, playerCrystalsChange, playerCastleHpChange, playerWallHpChange,
+                opponentBuildersChange, opponentBricksChange, opponentWeaponsmithsChange, opponentWeaponsChange,
+                opponentMagesChange, opponentCrystalsChange, opponentCastleHpChange, opponentWallHpChange};
+            for (Label changeLabel : changeLabels) {
+                changeLabel.setVisible(false);
+            }
+        });
     }
     /**
      * Displays last played card in the appropriate slot
@@ -314,7 +316,7 @@ public class GameSceneController extends BaseSceneController {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle(null);
                 alert.setHeaderText("VICTORY");
-                alert.setContentText("Congratulation, you won!");
+                alert.setContentText("Congratulations, you won!");
                 alert.showAndWait();
             } else {
                 Alert alert = new Alert(AlertType.WARNING);
@@ -322,6 +324,11 @@ public class GameSceneController extends BaseSceneController {
                 alert.setHeaderText("DEFEAT");
                 alert.setContentText("Sorry, you lost");
                 alert.showAndWait();
+            }
+            try {
+                application.replaceSceneContent(fxmlPaths.MENU);
+            } catch (Exception ex) {
+                Logger.getLogger(GameSceneController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

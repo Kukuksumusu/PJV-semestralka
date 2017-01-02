@@ -2,11 +2,8 @@
 package castlewars.ai;
 
 import castlewars.Castle;
-import castlewars.Deck;
-import castlewars.playable.weapons.Archer;
 import castlewars.playable.Playable;
-import castlewars.playable.weapons.Catapult;
-import java.util.LinkedList;
+import java.sql.Connection;
 import java.util.Random;
 
 /**
@@ -15,18 +12,8 @@ import java.util.Random;
  */
 public class BeginnerAI extends AI{
 
-    public BeginnerAI() {
-        super();
-        this.deck = new Deck();
-        this.hand = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            deck.addCard(new Catapult());
-        }
-        deck.shuffle();
-        
-        for (int i = 0; i < 5; i++) {
-            hand.add(deck.draw());
-        }
+    public BeginnerAI(Connection connection) {
+        super(AI.getDefaultDeck(connection));
     }
 
     @Override
@@ -44,7 +31,7 @@ public class BeginnerAI extends AI{
     }
 
     @Override
-    public Playable chooseDiscard(Castle aiCastle, Castle playerCastle) {
+    public Playable chooseAndDiscard(Castle aiCastle, Castle playerCastle) {
         Playable result = null;
         Random r = new Random();
         for (Playable card : hand) {

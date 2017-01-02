@@ -1,5 +1,8 @@
 package castlewars;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Class representing castle
  * @author Kukuksumusu
@@ -14,13 +17,13 @@ public class Castle {
     private int weapons;
     private int crystals;
 
-    public Castle(int hp, int wallHp, int builders, int weaponsmiths, int mages, int wood, int weapons, int crystals) {
+    public Castle(int hp, int wallHp, int builders, int weaponsmiths, int mages, int bricks, int weapons, int crystals) {
         this.hp = hp;
         this.wallHp = wallHp;
         this.builders = builders;
         this.weaponsmiths = weaponsmiths;
         this.mages = mages;
-        this.bricks = wood;
+        this.bricks = bricks;
         this.weapons = weapons;
         this.crystals = crystals;
     } 
@@ -154,11 +157,15 @@ public class Castle {
      * changes amount of hitpoints this castle has
      * @param change
      * @throws castlewars.Castle.GameLost 
+     * @throws castlewars.Castle.GameWon 
      */
-    public void changeHp(int change) throws GameLost {
+    public void changeHp(int change) throws GameLost, GameWon {
         hp += change;
         if (hp <= 0) {
             throw new GameLost();
+        }
+        if (hp >= 100) {
+            throw new GameWon();
         }
     }
     /**
@@ -179,18 +186,40 @@ public class Castle {
             throw new IllegalArgumentException("Damage can't be negative (that's not how healing works here)");
         }
         if (damage > wallHp) {
-            changeHp(-(damage - wallHp));
-            changeWallHp(-wallHp);
+            try {
+                changeHp(-(damage - wallHp));
+                changeWallHp(-wallHp);
+            } catch (GameWon ex) {
+                //shoud never happen
+                Logger.getLogger(Castle.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             changeWallHp(-damage);
         }
     }
+    /**
+     * 
+     * @return copy of the castle (for ai to play with)
+     */
+    public Castle deepCopy() {
+        return new Castle(hp, wallHp, builders, weaponsmiths, mages, bricks, weapons, crystals);
+    }
+    
     /**
      * Exception signalizing that this castle (and it's owner) has lost (hp <= 0)
      */
     public static class GameLost extends Exception {
 
         public GameLost() {
+        }
+    }
+
+    /**
+     * Exception signalizing that this castle (and it's owner) has won
+     */
+    public static class GameWon extends Exception {
+
+        public GameWon() {
         }
     }
 }

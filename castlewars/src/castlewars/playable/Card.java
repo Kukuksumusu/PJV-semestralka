@@ -32,8 +32,8 @@ public abstract class Card implements Playable{
     @Override
     public boolean canPlay(Castle castle) {
         return (castle.getBricks() >= getCost().getBricks()) && 
-                (castle.getWeapons() >= getCost().getBricks()) &&
-                (castle.getWeapons() >= getCost().getWeapons());
+                (castle.getWeapons() >= getCost().getWeapons()) &&
+                (castle.getCrystals()>= getCost().getCrystals());
     }
     /**
      * Expends resources needed to play this card

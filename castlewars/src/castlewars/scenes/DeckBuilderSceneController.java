@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package castlewars.scenes;
 
 import castlewars.fxmlPaths;
@@ -25,6 +21,7 @@ import javafx.scene.layout.VBox;
 import castlewars.playable.*;
 import java.sql.PreparedStatement;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 
@@ -91,7 +88,7 @@ public class DeckBuilderSceneController extends BaseSceneController {
     @FXML
     private void submitHandle(ActionEvent event) {
         if (numOfCards < 20) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Not enough cards");
             alert.setHeaderText("Your deck must have at least 20 cards");
             alert.showAndWait();
