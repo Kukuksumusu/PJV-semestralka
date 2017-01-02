@@ -5,9 +5,10 @@ package castlewars;
  * @author Kukuksumusu
  */
 public enum fxmlPaths {
-    PROFILE("profileSelectScene.fxml", null),
+    PROFILE("profileSelectScene.fxml", "profileSelectScene.css"),
     GAME("gameScene.fxml", "gameScene.css"),
-    DECK_BUILDER("deckBuilderScene.fxml", "deckBuilderScene.css");
+    DECK_BUILDER("deckBuilderScene.fxml", "deckBuilderScene.css"),
+    MENU("menuScene.fxml", "menuScene.css");
     
     private final String name;
     private final String css;

@@ -77,6 +77,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
         
         ToggleButton btn = new ToggleButton(name);
         btn.setToggleGroup(profiles);
+        btn.setSelected(true);
         btn.setFont(newProfile.getFont()); //use the same font as the other buttons are using
         pane.getChildren().add(btn);
         
@@ -94,8 +95,8 @@ public class ProfileSelectSceneController extends BaseSceneController {
         System.out.println("creating new");
         TextInputDialog dialog = new TextInputDialog("");
         dialog.setTitle("Name input");
-        dialog.setHeaderText("Please enter your name.");
-        //dialog.setContentText("Please enter your name:");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Please enter your name:");
         Optional<String> result = dialog.showAndWait();
         result.ifPresent((String name) -> {
             try {
@@ -150,7 +151,7 @@ public class ProfileSelectSceneController extends BaseSceneController {
             }
             System.out.println(((ToggleButton)profiles.getSelectedToggle()).getText());
             application.setPlayer(new User(application.getConnection(), ((ToggleButton)profiles.getSelectedToggle()).getText()));
-            application.replaceSceneContent(fxmlPaths.DECK_BUILDER);
+            application.replaceSceneContent(fxmlPaths.MENU);
         } catch (SQLException ex) {
             Logger.getLogger(ProfileSelectSceneController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

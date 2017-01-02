@@ -116,7 +116,7 @@ public class DeckBuilderSceneController extends BaseSceneController {
             Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            application.replaceSceneContent(fxmlPaths.GAME);
+            application.replaceSceneContent(fxmlPaths.MENU);
         } catch (Exception ex) {
             Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }

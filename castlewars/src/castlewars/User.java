@@ -66,6 +66,10 @@ public class User {
     public int getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
     
     public static class DoesntExistsException extends Exception {
         

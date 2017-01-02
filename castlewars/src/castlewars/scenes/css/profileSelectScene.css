@@ -1,0 +1,6 @@
+.button:default {
+    -fx-color:black;
+    -fx-background-color:#34c669;
+    -fx-background-radius: 10px;
+}
+
