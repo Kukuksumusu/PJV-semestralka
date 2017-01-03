@@ -8,7 +8,8 @@ public enum fxmlPaths {
     PROFILE("profileSelectScene.fxml", "profileSelectScene.css"),
     GAME("gameScene.fxml", "gameScene.css"),
     DECK_BUILDER("deckBuilderScene.fxml", "deckBuilderScene.css"),
-    MENU("menuScene.fxml", "menuScene.css");
+    MENU("menuScene.fxml", "menuScene.css"), 
+    INSTRUCTIONS("instructionsScene.fxml", null);
     
     private final String name;
     private final String css;

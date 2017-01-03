@@ -23,6 +23,7 @@ import java.sql.PreparedStatement;
 import javafx.beans.binding.DoubleBinding;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 
@@ -37,10 +38,13 @@ public class DeckBuilderSceneController extends BaseSceneController {
     private FlowPane flowPane;
     @FXML
     private Label numOfCardsLabel;
+    @FXML
+    private Button cancelButton;
     
     private List<Spinner> spinners;
     private Connection conn;
     private int numOfCards;
+
     /**
      * Initializes the controller class.
      * @param url
@@ -141,6 +145,15 @@ public class DeckBuilderSceneController extends BaseSceneController {
         }
         numOfCardsLabel.setText(numOfCards + "");
         
+    }
+
+    @FXML
+    private void handleCancel(ActionEvent event) {
+        try {
+            application.replaceSceneContent(fxmlPaths.MENU);
+        } catch (Exception ex) {
+            Logger.getLogger(DeckBuilderSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

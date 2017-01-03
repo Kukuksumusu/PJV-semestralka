@@ -8,3 +8,7 @@
     -fx-faint-focus-color: transparent;
     -fx-background-color: transparent;
 }
+
+#cancelButton {
+    -fx-background-color: #ff3333;
+}

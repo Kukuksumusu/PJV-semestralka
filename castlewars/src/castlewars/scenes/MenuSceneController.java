@@ -78,6 +78,15 @@ public class MenuSceneController extends BaseSceneController {
         }
     }
 
+    @FXML
+    private void instructionsHandle(ActionEvent event) {
+        try {
+            application.replaceSceneContent(fxmlPaths.INSTRUCTIONS);
+        } catch (Exception ex) {
+            Logger.getLogger(MenuSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
     
 }

@@ -7,3 +7,10 @@
 .discarding {
     -fx-text-fill: red;
 }
+#hBoxCards {
+    -fx-background-color: white;
+}
+
+.titled-pane {
+    -fx-border-color: black;
+}

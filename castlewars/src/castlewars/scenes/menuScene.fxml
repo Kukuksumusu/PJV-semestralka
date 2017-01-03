@@ -17,6 +17,7 @@
          <children>
             <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#startGameHandle" prefHeight="60.0" prefWidth="150.0" text="Start game" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deckBuilderHandle" prefHeight="60.0" prefWidth="150.0" text="Modify deck" />
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#instructionsHandle" prefHeight="60.0" prefWidth="150.0" text="Instructions" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#changeProfileHandle" prefHeight="60.0" prefWidth="150.0" text="Change profile" />
          </children>
       </VBox>

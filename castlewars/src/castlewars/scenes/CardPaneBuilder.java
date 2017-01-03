@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -43,6 +44,7 @@ public class CardPaneBuilder {
         }
         cardPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         cardPane.setId(Integer.toString(id));
+        
         AnchorPane.setTopAnchor(cardPane, 0.0);
         AnchorPane.setBottomAnchor(cardPane, 0.0);
         AnchorPane.setLeftAnchor(cardPane, 0.0);
